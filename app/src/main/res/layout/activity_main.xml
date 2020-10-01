@@ -70,6 +70,20 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimary">
 
+
+                <TextView
+                        android:text="Medicine Assistant"
+                        android:textSize="50sp"
+                        android:textColor="#FFFFFF"
+                        android:gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:maxHeight="160dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
                 <!--camera search entry-->
                 <androidx.cardview.widget.CardView
                         android:layout_width="300dp"
@@ -82,7 +96,8 @@
                         app:cardCornerRadius="30dp">
 
                     <!--todo: click event opens camera scan-->
-                    <androidx.appcompat.widget.AppCompatImageButton
+                    <androidx.appcompat.widget.AppCompatButton
+                            android:text="Camera Search"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
                 </androidx.cardview.widget.CardView>
@@ -142,8 +157,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:translationZ="0dp">
 
-                <!--todo add buttons, titles, anything here-->
-                <!--todo this is a dummy TextView, remove this-->
+                <!--todo: add buttons, titles, anything here-->
+                <!--todo: this is a dummy TextView, remove this-->
                 <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/dummyText"
                         android:layout_width="wrap_content"
@@ -156,7 +171,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
-                <!--todo this is a dummy button, it will add a dummy item to the recyclerview when clicked-->
+                <!--todo: this is a dummy button, it will add a dummy item to the recyclerview when clicked-->
+                <!--todo: remove this button-->
                 <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/dummyButton"
                         android:text="Add"

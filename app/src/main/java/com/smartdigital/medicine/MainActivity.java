@@ -20,15 +20,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //setup HomePager
         homePager = findViewById(R.id.view_pager);
         searchCard = findViewById(R.id.search_box);
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter();
         homePager.setAdapter(sectionsPagerAdapter);
         homePager.addOnPageChangeListener(new OnPageChangeListener(searchCard));
 
+        //initialize UserDataManager
         userDataManager = new UserDataManager();
+
+        //todo: remove this line
+        //generate dummy data for test purpose
         userDataManager.generateDummyData();
 
+        //setup RecyclerView
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(userDataManager.getAdapter());
@@ -37,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    //todo: remove this method
+    //add new UserMedicine to the RecyclerView
     public void dummyButtonClicked(View view)
     {
-        //add current location to the user location list
-        //userDataManager.add(new UserLocation("Current Location", currentMarker));
+        userDataManager.add(new UserMedicine("Random Drug"));
     }
 }
