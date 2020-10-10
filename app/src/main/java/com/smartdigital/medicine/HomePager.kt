@@ -1,6 +1,5 @@
 package com.smartdigital.medicine
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
