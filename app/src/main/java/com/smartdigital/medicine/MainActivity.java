@@ -6,11 +6,10 @@ import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.valkriaine.factor.HomePager;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static HomePager homePager;
-    public static CardView searchCard;
     private RecyclerView recyclerView;
     private UserDataManager userDataManager;
 
@@ -21,10 +20,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //setup HomePager
-        homePager = findViewById(R.id.view_pager);
-        searchCard = findViewById(R.id.search_box);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter();
-        homePager.setAdapter(sectionsPagerAdapter);
+        HomePager homePager = findViewById(R.id.view_pager);
+        CardView searchCard = findViewById(R.id.search_box);
+        homePager.addView(findViewById(R.id.search_page), 0);
+        homePager.addView(findViewById(R.id.setup_page), 1);
         homePager.addOnPageChangeListener(new OnPageChangeListener(searchCard));
 
         //initialize UserDataManager
