@@ -51,7 +51,7 @@
 
 
         <!--custom ViewPager that requires no fragments-->
-        <com.smartdigital.medicine.HomePager
+        <com.valkriaine.factor.HomePager
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -124,7 +124,7 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.smartdigital.medicine.HomePager>
+        </com.valkriaine.factor.HomePager>
 
 
 
