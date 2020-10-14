@@ -121,6 +121,8 @@
 
 
                 <ScrollView
+                        android:clipToPadding="false"
+                        android:paddingVertical="200dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -136,8 +138,7 @@
 
                         <!--todo: display drug information here-->
                         <TextView
-                                android:layout_marginTop="210dp"
-                                android:layout_marginBottom="10dp"
+                                android:layout_marginVertical="10dp"
                                 android:layout_width="match_parent"
                                 android:textSize="30sp"
                                 android:text="display drug information here"
