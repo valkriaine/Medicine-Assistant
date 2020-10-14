@@ -1,18 +1,20 @@
 package com.smartdigital.medicine;
 
-import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ramotion.fluidslider.FluidSlider;
 import com.valkriaine.factor.HomePager;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private UserDataManager userDataManager;
+    private final UserDataManager userDataManager = new UserDataManager();
 
 
     @Override
@@ -27,22 +29,34 @@ public class MainActivity extends AppCompatActivity {
         homePager.addView(findViewById(R.id.setup_page), 1);
         homePager.addOnPageChangeListener(new OnPageChangeListener(searchCard));
 
-        //initialize UserDataManager
-        userDataManager = new UserDataManager();
-
         //todo: remove this line
         //generate dummy data for test purpose
         userDataManager.generateDummyData();
 
         //setup RecyclerView
-        recyclerView = findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(userDataManager.getAdapter());
 
 
-        float positionDuration = 0f;
+
+        //example on how to retrieve position from slider
+        final float[] positionDuration = {0f};
         FluidSlider slider = findViewById(R.id.duration_slider);
-        //call setPositionListener on slider to retrieve the position
+        slider.setPositionListener(aFloat -> {
+            //do not update UI here
+            positionDuration[0] = aFloat;
+            return null;
+        });
+        slider.setEndTrackingListener(() -> {
+            //update UI here
+            Toast.makeText(MainActivity.this, String.valueOf(positionDuration[0]), Toast.LENGTH_SHORT).show();
+            return null;
+        });
+
+
+
+
     }
 
 
