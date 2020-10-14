@@ -1,11 +1,13 @@
 package com.smartdigital.medicine;
 
+import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.ramotion.fluidslider.FluidSlider;
 import com.valkriaine.factor.HomePager;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(userDataManager.getAdapter());
 
+
+        float positionDuration = 0f;
+        FluidSlider slider = findViewById(R.id.duration_slider);
+        //call setPositionListener on slider to retrieve the position
     }
 
 
