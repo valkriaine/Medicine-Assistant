@@ -10,7 +10,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ramotion.fluidslider.FluidSlider;
-import com.smartdigital.medicine.Database.DBHelper;
+import com.smartdigital.medicine.util.DBHelper;
+import com.smartdigital.medicine.util.OnPageChangeListener;
 import com.valkriaine.factor.HomePager;
 
 

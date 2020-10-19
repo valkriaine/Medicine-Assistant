@@ -1,4 +1,4 @@
-package com.smartdigital.medicine
+package com.smartdigital.medicine.util
 
 import android.animation.ObjectAnimator
 import android.view.View
