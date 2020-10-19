@@ -1,5 +1,7 @@
 package com.smartdigital.medicine;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -8,19 +10,25 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.ramotion.fluidslider.FluidSlider;
+import com.smartdigital.medicine.Database.DBHelper;
 import com.valkriaine.factor.HomePager;
-import kotlin.Unit;
-import kotlin.jvm.functions.Function0;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private final UserDataManager userDataManager = new UserDataManager();
+    private DBHelper databaseHelper;
+    private SQLiteDatabase drugs;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //access drugs.db
+        databaseHelper = new DBHelper(this);
+        drugs = databaseHelper.getWritableDatabase();
 
         //setup HomePager
         HomePager homePager = findViewById(R.id.view_pager);
@@ -56,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        //example call to access the drugs database
+        //this prints the index of the column with name "ACCESSION"
+        Cursor c = drugs.rawQuery("select * from drugs limit 1 offset $index", null);
+        int index = c.getColumnIndex("ACCESSION");
+        Toast.makeText(MainActivity.this,  String.valueOf(index), Toast.LENGTH_SHORT).show();
 
     }
 
