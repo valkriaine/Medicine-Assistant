@@ -24,28 +24,21 @@
         <androidx.cardview.widget.CardView
                 android:id="@+id/search_box"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="200dp"
                 android:layout_marginHorizontal="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:cardCornerRadius="30dp">
+                app:cardCornerRadius="5dp">
 
-
-                <!--todo implement search feature here-->
-                <androidx.appcompat.widget.SearchView
-                        android:id="@+id/search_view"
-                        android:layout_width="match_parent"
-                        app:searchIcon="@drawable/search_icon"
-                        android:background="#99FFFFFF"
-                        app:searchHintIcon="@drawable/search_icon"
-                        android:layout_height="match_parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="10dp"/>
-
+            <com.mancj.materialsearchbar.MaterialSearchBar
+                    style="@style/MaterialSearchBarLight"
+                    app:mt_hint="Search your medicine here"
+                    app:mt_maxSuggestionsCount="10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/searchBar" />
 
         </androidx.cardview.widget.CardView>
 
