@@ -20,6 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+
         <!--search box-->
         <androidx.cardview.widget.CardView
                 android:id="@+id/search_box"
@@ -32,13 +34,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:cardCornerRadius="5dp">
 
+
             <com.mancj.materialsearchbar.MaterialSearchBar
                     style="@style/MaterialSearchBarLight"
                     app:mt_hint="Search your medicine here"
-                    app:mt_maxSuggestionsCount="10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/searchBar" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/suggestions_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="50dp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -131,6 +140,7 @@
 
                         <!--todo: display drug information here-->
                         <TextView
+                                android:id="@+id/drug_name"
                                 android:layout_marginVertical="10dp"
                                 android:layout_width="match_parent"
                                 android:textSize="30sp"

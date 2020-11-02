@@ -4,7 +4,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,17 +16,14 @@ import com.smartdigital.medicine.util.DrugsDatabaseTable;
 import com.smartdigital.medicine.util.OnPageChangeListener;
 import com.valkriaine.factor.HomePager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity{
 
     private final UserDataManager userDataManager = new UserDataManager();
     private DrugsDatabaseTable drugsDatabaseTable;
     private MaterialSearchBar searchBar;
-    private CustomSuggestionsAdapter customSuggestionsAdapter;
-    private List<UserMedicine> suggestions = new ArrayList<>();
+    private CustomSuggestionsAdapter suggestionsAdapter;
+
     private Cursor c;
 
     @Override
@@ -38,58 +34,56 @@ public class MainActivity extends AppCompatActivity{
         //access drugs.db
         drugsDatabaseTable = new DrugsDatabaseTable(this);
 
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        customSuggestionsAdapter = new CustomSuggestionsAdapter(inflater);
+
 
 
         //setup HomePager
         HomePager homePager = findViewById(R.id.view_pager);
         homePager.addView(findViewById(R.id.search_page), 0);
         homePager.addView(findViewById(R.id.setup_page), 1);
-        homePager.addOnPageChangeListener(new OnPageChangeListener(findViewById(R.id.search_box)));
+
         searchBar = findViewById(R.id.searchBar);
-        searchBar.setSuggestionsEnabled(true);
-        searchBar.setMaxSuggestionCount(10);
-        searchBar.setCustomSuggestionAdapter(customSuggestionsAdapter);
-        customSuggestionsAdapter.clearSuggestions();
+        searchBar.setSuggestionsEnabled(false);
+
+
+        //setup search bar suggestions
+        suggestionsAdapter = new CustomSuggestionsAdapter(homePager);
+        RecyclerView r = findViewById(R.id.suggestions_list);
+        r.setLayoutManager(new LinearLayoutManager(this));
+        r.setAdapter(suggestionsAdapter);
+        homePager.addOnPageChangeListener(new OnPageChangeListener(findViewById(R.id.search_box), suggestionsAdapter, findViewById(R.id.drug_name)));
 
 
 
 
         //search for drug after text change in the search bar
-        searchBar.addTextChangeListener(new TextWatcher() {
-
+        searchBar.addTextChangeListener(new TextWatcher()
+        {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
-                suggestions.clear();
+                suggestionsAdapter.clear();
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
                 c = drugsDatabaseTable.getWordMatches(searchBar.getText());
-                c.moveToFirst();
-                while(!c.isAfterLast()&&suggestions.size() <= 10)
-                {
-                    suggestions.add(new UserMedicine(String.valueOf(c.getString(c.getColumnIndex("DRUG_NAME")))));
-                    c.moveToNext();
+                if (!searchBar.getText().isEmpty()) {
+                    c.moveToFirst();
+                    while (!c.isAfterLast() && suggestionsAdapter.getItemCount() <= 40) {
+                        UserMedicine u = new UserMedicine(String.valueOf(c.getString(c.getColumnIndex("DRUG_NAME"))), String.valueOf(c.getString(c.getColumnIndex("TARGET_NAME"))));
+                        if (!suggestionsAdapter.contains(u))
+                            suggestionsAdapter.addSuggestions(u);
+                        c.moveToNext();
+                    }
                 }
-
-                //todo: suggestions are not being displayed, need fix
-                customSuggestionsAdapter.setSuggestions(suggestions);
-
-                //debug: display the first item in the suggestion list
-                if (suggestions.size() != 0)
-                Toast.makeText(MainActivity.this,  suggestions.get(0).toString(), Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void afterTextChanged(Editable s)
-            {
-
-            }
+            {}
         });
+
+
 
 
         //todo: remove this line
@@ -100,6 +94,9 @@ public class MainActivity extends AppCompatActivity{
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(userDataManager.getAdapter());
+
+
+
 
 
 
