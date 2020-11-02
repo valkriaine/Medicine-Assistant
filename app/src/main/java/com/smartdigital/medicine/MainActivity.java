@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
+
         //search for drug after text change in the search bar
         searchBar.addTextChangeListener(new TextWatcher()
         {
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count)
             {
+                if (homePager.getCurrentItem() != 0)
+                    homePager.setCurrentItem(0, true);
                 c = drugsDatabaseTable.getWordMatches(searchBar.getText());
                 if (!searchBar.getText().isEmpty()) {
                     c.moveToFirst();

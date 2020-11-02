@@ -40,7 +40,7 @@
                     app:mt_hint="Search your medicine here"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/searchBar" />
+                    android:id="@+id/searchBar"/>
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/suggestions_list"
@@ -135,7 +135,7 @@
                     <androidx.appcompat.widget.LinearLayoutCompat
                             android:orientation="vertical"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content">
 
 
                         <!--todo: display drug information here-->
