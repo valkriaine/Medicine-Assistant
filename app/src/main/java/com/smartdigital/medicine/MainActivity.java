@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity
     public static UserMedicine currentMed;
 
     private final float[] positionDuration = {0f};
-    private final float[] positionFrequency = {0f};
 
     private Cursor c;
 
@@ -60,8 +59,7 @@ public class MainActivity extends AppCompatActivity
         if (currentMed != null)
         {
             currentMed.setDuration(positionDuration[0]);
-            currentMed.setFrequency(positionFrequency[0]);
-            if (currentMed.getDuration() != 0 && currentMed.getFrequency() != 0)
+            if (currentMed.getDuration() != 0)
             {
                 userDataManager.add(currentMed);
                 SlidingUpPanelLayout drawer = findViewById(R.id.drawer);

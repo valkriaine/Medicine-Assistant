@@ -7,7 +7,7 @@ public class UserMedicine
     private final String name;
     private String targetName = "Unknown";
     private float duration = 0;
-    private float frequency = 0;
+
     //todo: add time of day and other drug info here
 
     public UserMedicine(String name)
@@ -37,13 +37,6 @@ public class UserMedicine
         return getName() + "\n" + getTargetName();
     }
 
-    public float getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(float frequency) {
-        this.frequency = frequency;
-    }
 
     public float getDuration() {
         return duration;
