@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.smartdigital.medicine.MainActivity;
 import com.smartdigital.medicine.R;
 import com.smartdigital.medicine.UserMedicine;
 import com.valkriaine.factor.HomePager;
@@ -21,10 +23,12 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
     private final List<UserMedicine> suggestions = new ArrayList<>();
     private final HomePager homePager;
     private UserMedicine selectedDrug;
+    private MaterialSearchBar searchBar;
 
-    public CustomSuggestionsAdapter(HomePager homePager)
+    public CustomSuggestionsAdapter(HomePager homePager, MaterialSearchBar searchBar)
     {
         this.homePager = homePager;
+        this.searchBar = searchBar;
     }
 
     @NonNull
@@ -94,6 +98,8 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
         public void onClick(View v) {
             selectedDrug = suggestions.get(getAdapterPosition());
             homePager.setCurrentItem(1, true);
+            MainActivity.currentMed = selectedDrug;
+            searchBar.clearFocus();
 
         }
     }

@@ -192,42 +192,28 @@
 
 
 
-                        <TextView
-                                android:id="@+id/time_of_day_text"
-                                android:text="I am taking medicine at:"
-                                android:textSize="20sp"
-                                android:textColor="#FFFFFF"
-                                android:gravity="start"
+
+
+                        <!--todo: add alarm clock here to setup time of day-->
+
+
+
+
+
+
+
+                        <androidx.appcompat.widget.AppCompatButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="40dp"
                                 android:layout_marginHorizontal="50dp"
-                                android:maxHeight="160dp"/>
-
-                        <com.ramotion.fluidslider.FluidSlider
-                                android:id="@+id/time_of_day_slider"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:translationY="-80dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginHorizontal="50dp"/>
-
-
-
+                                android:layout_gravity="center"
+                                android:text="Confirm"
+                                android:onClick="confirmAddDrug"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </ScrollView>
-
-
-
-                <!--todo: add a button to display more sliders here-->
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.valkriaine.factor.HomePager>
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -255,35 +241,18 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:translationZ="0dp">
 
-                <!--todo: add buttons, titles, anything here-->
                 <!--todo: this is a dummy TextView, remove this-->
                 <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/dummyText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Slide up"
+                        android:text="My medicines"
                         android:textSize="20sp"
                         android:layout_marginTop="20dp"
                         android:gravity="center_horizontal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
-
-                <!--todo: this is a dummy button, it will add a dummy item to the recyclerview when clicked-->
-                <!--todo: remove this button-->
-                <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/dummyButton"
-                        android:text="Add"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/dummyText"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:textAlignment="center"
-                        android:textSize="15sp"
-                        android:layout_marginStart="10dp"
-                        android:onClick="dummyButtonClicked"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
