@@ -100,7 +100,8 @@
                         android:id="@+id/takePicture"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:onClick="safeCameraOpen"
+
+
                         android:text="Camera Search" />
                 </androidx.cardview.widget.CardView>
 
@@ -142,48 +143,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     />
 
-                <TextView
-                    android:id="@+id/text_display"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="display text from image"
-                    android:layout_below="@+id/image_view"
-                    android:textSize="26dp"
-                    android:maxLines="5"
-                    android:layout_margin="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
 
-                     />
 
-                <!--camera button to take the picture from camera app-->
-                <Button
-                    android:id="@+id/capture_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="capture image"
-                    android:textAllCaps="false"
-                    android:layout_above="@+id/read_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
-                    />
-
-                <!--read the text from previous picture taken-->
-                <Button
-                    android:id="@+id/read_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:text="read image"
-                    android:textAllCaps="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
-                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
