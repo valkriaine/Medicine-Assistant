@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity
 
 
 
+        //alarm code
+
 
 
 
@@ -67,8 +69,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-
-
     private void initializeComponents()
     {
         //setup HomePager
@@ -123,9 +123,7 @@ public class MainActivity extends AppCompatActivity
 
         //initialize sliders
         FluidSlider durationSlider = findViewById(R.id.duration_slider);
-        FluidSlider frequencySlider = findViewById(R.id.frequency_slider);
         TextView durationText = findViewById(R.id.duration_text);
-        TextView frequencyText = findViewById(R.id.frequency_text);
 
         //setup duration slider
         durationSlider.setStartText("0");
@@ -141,23 +139,6 @@ public class MainActivity extends AppCompatActivity
             durationSlider.setPosition(positionDuration[0] /365);
             //update UI here
             durationText.setText("I am taking medicine for: " + positionDuration[0] + " days.");
-            return null;
-        });
-
-        //setup frequency slider
-        frequencySlider.setStartText("0");
-        frequencySlider.setEndText("7");
-        frequencySlider.setPosition(0);
-        frequencySlider.setPositionListener(aFloat -> {
-            //do not update UI here
-            positionFrequency[0] = (int) (7 * aFloat);
-            frequencySlider.setBubbleText(String.valueOf(positionFrequency[0]));
-            return null;
-        });
-        frequencySlider.setEndTrackingListener(() -> {
-            frequencySlider.setPosition(positionFrequency[0] /7);
-            //update UI here
-            frequencyText.setText("I am taking medicine every: " + positionFrequency[0] + " days.");
             return null;
         });
     }
