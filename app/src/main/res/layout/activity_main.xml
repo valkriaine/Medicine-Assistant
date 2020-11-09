@@ -177,12 +177,173 @@
 
 
                         <!--todo: add alarm clock here to setup time of day-->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:cardCornerRadius="4dp"
+                            app:cardElevation="2dp"
+                            app:cardUseCompatPadding="true"
+                            app:contentPadding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                        <com.smartdigital.medicine.util.RobotoBoldTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Medicine Days"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
+
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/every_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="every_day" />
+
+                        <LinearLayout
+                            android:id="@+id/checkbox_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="7">
+
+                            <com.smartdigital.medicine.util.DayViewCheckBox
+                                android:id="@+id/dv_sunday"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/background_day_view"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="S" />
+
+                            <com.smartdigital.medicine.util.DayViewCheckBox
+                                android:id="@+id/dv_monday"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/background_day_view"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="M" />
+
+
+                            <com.smartdigital.medicine.util.DayViewCheckBox
+                                android:id="@+id/dv_tuesday"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/background_day_view"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="T" />
+
+                            <com.smartdigital.medicine.util.DayViewCheckBox
+                                android:id="@+id/dv_wednesday"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/background_day_view"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="W" />
+
+                            <com.smartdigital.medicine.util.DayViewCheckBox
+                                android:id="@+id/dv_thursday"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/background_day_view"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="T" />
+
+                            <com.smartdigital.medicine.util.DayViewCheckBox
+                                android:id="@+id/dv_friday"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/background_day_view"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="F" />
+
+
+                            <com.smartdigital.medicine.util.DayViewCheckBox
+                                android:id="@+id/dv_saturday"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/background_day_view"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="S" />
+                        </LinearLayout>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:cardCornerRadius="4dp"
+                            app:cardElevation="2dp"
+                            app:cardUseCompatPadding="true"
+                            app:contentPadding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <com.smartdigital.medicine.util.RobotoBoldTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="  Reminder"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="16dp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <com.smartdigital.medicine.util.RobotoBoldTextView
+                                        android:id="@+id/tv_medicine_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/drawable_underline"
+                                        android:gravity="center"
+                                        android:padding="4dp"
+                                        android:textSize="16dp"
+                                        android:textStyle="bold"
+                                        android:textColor="#4d4d4d"
+                                        tools:text="23:30" />
+
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
 
 
 
 
 
-
+/////////
 
                         <androidx.appcompat.widget.AppCompatButton
                                 android:layout_width="wrap_content"
