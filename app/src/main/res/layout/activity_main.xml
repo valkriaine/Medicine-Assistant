@@ -20,32 +20,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+
         <!--search box-->
         <androidx.cardview.widget.CardView
                 android:id="@+id/search_box"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="200dp"
                 android:layout_marginHorizontal="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:cardCornerRadius="30dp">
+                app:cardCornerRadius="5dp">
 
 
-                <!--todo implement search feature here-->
-                <androidx.appcompat.widget.SearchView
-                        android:id="@+id/search_view"
-                        android:layout_width="match_parent"
-                        app:searchIcon="@drawable/search_icon"
-                        android:background="#99FFFFFF"
-                        app:searchHintIcon="@drawable/search_icon"
-                        android:layout_height="match_parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="10dp"/>
+            <com.mancj.materialsearchbar.MaterialSearchBar
+                    style="@style/MaterialSearchBarLight"
+                    app:mt_hint="Search your medicine here"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/searchBar"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/suggestions_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="50dp"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -72,7 +74,7 @@
 
 
                 <TextView
-                        android:text="Medicine Assistant"
+                        android:text="@string/app_title"
                         android:textSize="50sp"
                         android:textColor="#FFFFFF"
                         android:gravity="center_horizontal"
@@ -123,9 +125,32 @@
                     android:background="@color/colorPrimaryDark">
 
 
-                <!--todo: add sliders and other medicine setup controls here-->
+                <ScrollView
+                        android:clipToPadding="false"
+                        android:paddingVertical="200dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
 
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                        <!--todo: display drug information here-->
+                        <TextView
+                                android:id="@+id/drug_name"
+                                android:layout_marginVertical="10dp"
+                                android:layout_width="match_parent"
+                                android:textSize="30sp"
+                                android:text="display drug information here"
+                                android:layout_marginHorizontal="50dp"
+                                android:layout_height="180dp"
+                                android:gravity="start"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!--this is the camera page -->
@@ -152,9 +177,52 @@
         </com.valkriaine.factor.HomePager>
 
 
+                        <TextView
+                                android:id="@+id/duration_text"
+                                android:text="I am taking medicine for:"
+                                android:textSize="20sp"
+                                android:textColor="#FFFFFF"
+                                android:gravity="start"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="50dp"
+                                android:layout_marginTop="30dp"
+                                android:maxHeight="160dp"/>
+
+                        <com.ramotion.fluidslider.FluidSlider
+                                android:id="@+id/duration_slider"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:translationY="-80dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginHorizontal="50dp"/>
 
 
 
+
+
+
+
+                        <!--todo: add alarm clock here to setup time of day-->
+
+
+
+
+
+
+
+                        <androidx.appcompat.widget.AppCompatButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="40dp"
+                                android:layout_marginHorizontal="50dp"
+                                android:layout_gravity="center"
+                                android:text="Confirm"
+                                android:onClick="confirmAddDrug"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.valkriaine.factor.HomePager>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -182,35 +250,18 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:translationZ="0dp">
 
-                <!--todo: add buttons, titles, anything here-->
                 <!--todo: this is a dummy TextView, remove this-->
                 <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/dummyText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Slide up"
+                        android:text="My medicines"
                         android:textSize="20sp"
                         android:layout_marginTop="20dp"
                         android:gravity="center_horizontal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
-
-                <!--todo: this is a dummy button, it will add a dummy item to the recyclerview when clicked-->
-                <!--todo: remove this button-->
-                <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/dummyButton"
-                        android:text="Add"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/dummyText"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:textAlignment="center"
-                        android:textSize="15sp"
-                        android:layout_marginStart="10dp"
-                        android:onClick="dummyButtonClicked"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
