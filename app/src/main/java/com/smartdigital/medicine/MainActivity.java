@@ -18,6 +18,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.valkriaine.factor.HomePager;
 
 
+
 public class MainActivity extends AppCompatActivity
 {
 
@@ -28,6 +29,12 @@ public class MainActivity extends AppCompatActivity
     public static UserMedicine currentMed;
 
     private final float[] positionDuration = {0f};
+
+public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private UserDataManager userDataManager;
+
 
     private Cursor c;
 
@@ -69,6 +76,8 @@ public class MainActivity extends AppCompatActivity
     }
     private void initializeComponents()
     {
+
+
         //setup HomePager
         HomePager homePager = findViewById(R.id.view_pager);
         homePager.addView(findViewById(R.id.search_page), 0);
@@ -83,6 +92,10 @@ public class MainActivity extends AppCompatActivity
         r.setLayoutManager(new LinearLayoutManager(this));
         r.setAdapter(suggestionsAdapter);
         homePager.addOnPageChangeListener(new OnPageChangeListener(findViewById(R.id.search_box), suggestionsAdapter, findViewById(R.id.drug_name)));
+
+
+        //initialize UserDataManager
+        userDataManager = new UserDataManager();
 
         //search for drug after text change in the search bar
         searchBar.addTextChangeListener(new TextWatcher()
@@ -122,7 +135,6 @@ public class MainActivity extends AppCompatActivity
         //initialize sliders
         FluidSlider durationSlider = findViewById(R.id.duration_slider);
         TextView durationText = findViewById(R.id.duration_text);
-
         //setup duration slider
         durationSlider.setStartText("0");
         durationSlider.setEndText("365");
@@ -139,5 +151,4 @@ public class MainActivity extends AppCompatActivity
             durationText.setText("I am taking medicine for: " + positionDuration[0] + " days.");
             return null;
         });
-    }
 }

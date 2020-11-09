@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "330552973233",
+    "firebase_url": "https://medicine-text-camera-recg.firebaseio.com",
+    "project_id": "medicine-text-camera-recg",
+    "storage_bucket": "medicine-text-camera-recg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330552973233:android:8062ededa8272f85004f90",
+        "android_client_info": {
+          "package_name": "com.example.camera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330552973233-gafd9u0l4g1n19mtjei3f1u3qk69sn86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwDNhY5Yn4bJQ4GfQkgydsjVardhtiwzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330552973233-gafd9u0l4g1n19mtjei3f1u3qk69sn86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330552973233:android:31484f3ad3065d9e004f90",
+        "android_client_info": {
+          "package_name": "com.smartdigital.medicine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330552973233-gafd9u0l4g1n19mtjei3f1u3qk69sn86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwDNhY5Yn4bJQ4GfQkgydsjVardhtiwzE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330552973233-gafd9u0l4g1n19mtjei3f1u3qk69sn86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
