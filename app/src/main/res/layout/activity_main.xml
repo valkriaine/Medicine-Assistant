@@ -102,11 +102,8 @@
                         android:id="@+id/takePicture"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:onClick="safeCameraOpen"
                         android:text="Camera Search" />
                 </androidx.cardview.widget.CardView>
-
-
 
 
 
@@ -150,91 +147,27 @@
                                 android:layout_marginHorizontal="50dp"
                                 android:layout_height="180dp"
                                 android:gravity="start"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!--this is the camera page -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/camera_page"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/image_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
-
-                <TextView
-                    android:id="@+id/text_display"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="display text from image"
-                    android:layout_below="@+id/image_view"
-                    android:textSize="26dp"
-                    android:maxLines="5"
-                    android:layout_margin="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
-                     />
-
-                <!--camera button to take the picture from camera app-->
-                <Button
-                    android:id="@+id/capture_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="capture image"
-                    android:textAllCaps="false"
-                    android:layout_above="@+id/read_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
-                    />
-
-                <!--read the text from previous picture taken-->
-                <Button
-                    android:id="@+id/read_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:text="read image"
-                    android:textAllCaps="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
-                    />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.valkriaine.factor.HomePager>
 
 
                         <TextView
-                                android:id="@+id/duration_text"
-                                android:text="I am taking medicine for:"
-                                android:textSize="20sp"
-                                android:textColor="#FFFFFF"
-                                android:gravity="start"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="50dp"
-                                android:layout_marginTop="30dp"
-                                android:maxHeight="160dp"/>
+                            android:id="@+id/duration_text"
+                            android:text="I am taking medicine for:"
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"
+                            android:gravity="start"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="50dp"
+                            android:layout_marginTop="30dp"
+                            android:maxHeight="160dp"/>
 
                         <com.ramotion.fluidslider.FluidSlider
-                                android:id="@+id/duration_slider"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:translationY="-80dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginHorizontal="50dp"/>
+                            android:id="@+id/duration_slider"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:translationY="-80dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginHorizontal="50dp"/>
 
 
 
@@ -251,16 +184,19 @@
 
 
                         <androidx.appcompat.widget.AppCompatButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="40dp"
-                                android:layout_marginHorizontal="50dp"
-                                android:layout_gravity="center"
-                                android:text="Confirm"
-                                android:onClick="confirmAddDrug"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="40dp"
+                            android:layout_marginHorizontal="50dp"
+                            android:layout_gravity="center"
+                            android:text="Confirm"
+                            android:onClick="confirmAddDrug"/>
+
+
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </ScrollView>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </com.valkriaine.factor.HomePager>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

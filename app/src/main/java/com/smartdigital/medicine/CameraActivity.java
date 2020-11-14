@@ -36,10 +36,10 @@ public class CameraActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        capture = findViewById(R.id.capture_image);
-        translate = findViewById(R.id.read_text);
-        imageView = findViewById(R.id.image_view);
-        textView = findViewById(R.id.text_display);
+        //capture = findViewById(R.id.capture_image);
+        //translate = findViewById(R.id.read_text);
+        //imageView = findViewById(R.id.image_view);
+        //textView = findViewById(R.id.text_display);
 
         capture.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,8 +19,7 @@ import com.valkriaine.factor.HomePager;
 
 
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
 
     private final UserDataManager userDataManager = new UserDataManager();
     private DrugsDatabaseTable drugsDatabaseTable;
@@ -30,17 +29,11 @@ public class MainActivity extends AppCompatActivity
 
     private final float[] positionDuration = {0f};
 
-public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private UserDataManager userDataManager;
-
 
     private Cursor c;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -51,31 +44,23 @@ public class MainActivity extends AppCompatActivity {
         initializeComponents();
 
 
-
         //alarm code
-
-
-
-
 
 
     }
 
-    public void confirmAddDrug(View view)
-    {
-        if (currentMed != null)
-        {
+    public void confirmAddDrug(View view) {
+        if (currentMed != null) {
             currentMed.setDuration(positionDuration[0]);
-            if (currentMed.getDuration() != 0)
-            {
+            if (currentMed.getDuration() != 0) {
                 userDataManager.add(currentMed);
                 SlidingUpPanelLayout drawer = findViewById(R.id.drawer);
                 drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
             }
         }
     }
-    private void initializeComponents()
-    {
+
+    private void initializeComponents() {
 
 
         //setup HomePager
@@ -94,20 +79,15 @@ public class MainActivity extends AppCompatActivity {
         homePager.addOnPageChangeListener(new OnPageChangeListener(findViewById(R.id.search_box), suggestionsAdapter, findViewById(R.id.drug_name)));
 
 
-        //initialize UserDataManager
-        userDataManager = new UserDataManager();
-
         //search for drug after text change in the search bar
-        searchBar.addTextChangeListener(new TextWatcher()
-        {
+        searchBar.addTextChangeListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 suggestionsAdapter.clear();
             }
+
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (homePager.getCurrentItem() != 0)
                     homePager.setCurrentItem(0, true);
                 c = drugsDatabaseTable.getWordMatches(searchBar.getText());
@@ -121,9 +101,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
-            public void afterTextChanged(Editable s)
-            {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         //setup RecyclerView
@@ -146,9 +127,10 @@ public class MainActivity extends AppCompatActivity {
             return null;
         });
         durationSlider.setEndTrackingListener(() -> {
-            durationSlider.setPosition(positionDuration[0] /365);
+            durationSlider.setPosition(positionDuration[0] / 365);
             //update UI here
             durationText.setText("I am taking medicine for: " + positionDuration[0] + " days.");
             return null;
         });
+    }
 }
