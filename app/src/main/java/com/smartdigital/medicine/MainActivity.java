@@ -219,6 +219,11 @@ public class MainActivity extends AppCompatActivity
 
 
     }
+
+    private void displayTextFromImage(FirebaseVisionText firebaseVisionText) {
+        
+    }
+
     //todo: remove this method
     //add new UserMedicine to the RecyclerView
     public void dummyButtonClicked(View view)
