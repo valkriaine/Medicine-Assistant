@@ -4,9 +4,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,14 +23,12 @@ public class MainActivity extends AppCompatActivity
 {
 
     private ActivityMainBinding binding;
-
     private UserDataManager userDataManager;
     private DrugsDatabaseTable drugsDatabaseTable;
     private CustomSuggestionsAdapter suggestionsAdapter;
     public static UserMedicine currentMed;
 
     private final float[] positionDuration = {0f};
-
 
     private Cursor c;
 
@@ -39,16 +37,22 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        //initialize user data manager
         userDataManager = new UserDataManager(this, binding.recyclerview);
+
 
         //access drugs.db
         drugsDatabaseTable = new DrugsDatabaseTable(this);
+
 
         initializeComponents();
 
 
     }
 
+
+    //add new medicine and create its alarm
     public void confirmAddDrug(View view)
     {
         if (currentMed != null)
@@ -66,11 +70,12 @@ public class MainActivity extends AppCompatActivity
                 currentMed.setSaturday(binding.dvSaturday.isChecked());
                 currentMed.setSunday(binding.dvSunday.isChecked());
                 userDataManager.add(currentMed);
-                Log.d("medicine", currentMed.toString());
                 SlidingUpPanelLayout drawer = findViewById(R.id.drawer);
                 drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
             }
         }
+        else
+            Toast.makeText(this, "Please setup the medicine", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -79,6 +84,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    //initialize UI components
     private void initializeComponents()
     {
         //setup HomePager
@@ -132,20 +138,19 @@ public class MainActivity extends AppCompatActivity
         binding.durationSlider.setEndText("365");
         binding.durationSlider.setPosition(0);
         binding.durationSlider.setPositionListener(aFloat -> {
-            //do not update UI here
             positionDuration[0] = (int) (365 * aFloat);
             binding.durationSlider.setBubbleText(String.valueOf(positionDuration[0]));
             return null;
         });
        binding.durationSlider.setEndTrackingListener(() -> {
             binding.durationSlider.setPosition(positionDuration[0] /365);
-            //update UI here
             binding.durationText.setText("I am taking medicine for: " + positionDuration[0] + " days.");
             return null;
         });
     }
 
 
+    //click event for "every day"
     public void onCheckboxClicked(View view)
     {
         boolean checked = ((CheckBox) view).isChecked();

@@ -2,6 +2,7 @@
 
 <layout xmlns:tools="http://schemas.android.com/tools">
     <data>
+        <!--data binding-->
         <variable
             name="binding"
             type="com.smartdigital.medicine.MainActivity" />

@@ -12,15 +12,14 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import com.smartdigital.medicine.AlarmReceiver;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Calendar;
-
 import static com.smartdigital.medicine.util.Constants.*;
 
-//todo: alarm somethings rings somethings doesn't, sometimes rings early
 @Entity
 public class UserMedicine
 {
+
+    //SQLite fields
 
     @PrimaryKey
     private int id;
@@ -61,8 +60,9 @@ public class UserMedicine
     @ColumnInfo(name = "sunday")
     private boolean sunday;
 
-    //todo: add time of day and other drug info here
 
+
+    //constructors
     @Ignore
     public UserMedicine(String name)
     {
@@ -76,7 +76,20 @@ public class UserMedicine
         this.targetName = targetName;
     }
 
-    public UserMedicine(int id, String name, String targetName, float duration, int hour, int minute, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, boolean sunday)
+
+    public UserMedicine(int id,
+                        String name,
+                        String targetName,
+                        float duration,
+                        int hour,
+                        int minute,
+                        boolean monday,
+                        boolean tuesday,
+                        boolean wednesday,
+                        boolean thursday,
+                        boolean friday,
+                        boolean saturday,
+                        boolean sunday)
     {
         this.id = id;
         this.name = name;
@@ -94,7 +107,35 @@ public class UserMedicine
     }
 
 
+    @Ignore
+    public UserMedicine(Bundle bundle)
+    {
+        this.id = bundle.getInt(ID);
+        this.name = bundle.getString(NAME);
+        this.targetName = bundle.getString(TARGET_NAME);
+        this.duration = bundle.getFloat(DURATION);
+        this.hour = bundle.getInt(HOUR);
+        this.minute = bundle.getInt(MINUTE);
+        this.monday = bundle.getBoolean(MONDAY);
+        this.tuesday = bundle.getBoolean(TUESDAY);
+        this.wednesday = bundle.getBoolean(WEDNESDAY);
+        this.thursday = bundle.getBoolean(THURSDAY);
+        this.friday = bundle.getBoolean(FRIDAY);
+        this.saturday = bundle.getBoolean(SATURDAY);
+        this.sunday = bundle.getBoolean(SUNDAY);
+    }
 
+
+
+
+
+
+
+
+
+
+
+    //getters and setters
 
     public String getName()
     {
@@ -107,10 +148,6 @@ public class UserMedicine
         return this.targetName;
     }
 
-    public void setTargetName(String targetName)
-    {
-        this.targetName = targetName;
-    }
 
     public float getDuration() {
         return duration;
@@ -213,6 +250,12 @@ public class UserMedicine
     }
 
 
+
+
+
+
+
+    //compare the id when calling .equals()
     @Override
     public boolean equals(@Nullable @org.jetbrains.annotations.Nullable Object obj)
     {
@@ -222,6 +265,8 @@ public class UserMedicine
             return false;
     }
 
+
+    //for logging purpose
     @NotNull
     public String toString()
     {
@@ -241,23 +286,6 @@ public class UserMedicine
     }
 
 
-    @Ignore
-    public UserMedicine(Bundle bundle)
-    {
-        this.id = bundle.getInt(ID);
-        this.name = bundle.getString(NAME);
-        this.targetName = bundle.getString(TARGET_NAME);
-        this.duration = bundle.getFloat(DURATION);
-        this.hour = bundle.getInt(HOUR);
-        this.minute = bundle.getInt(MINUTE);
-        this.monday = bundle.getBoolean(MONDAY);
-        this.tuesday = bundle.getBoolean(TUESDAY);
-        this.wednesday = bundle.getBoolean(WEDNESDAY);
-        this.thursday = bundle.getBoolean(THURSDAY);
-        this.friday = bundle.getBoolean(FRIDAY);
-        this.saturday = bundle.getBoolean(SATURDAY);
-        this.sunday = bundle.getBoolean(SUNDAY);
-    }
 
 
 
@@ -273,6 +301,7 @@ public class UserMedicine
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), generateIntent(context));
     }
 
+    //reschedule the alarm when received
     public void reSchedule(Context context)
     {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -284,6 +313,8 @@ public class UserMedicine
     }
 
 
+
+    //generate PendingIntent object specific to the current UserMedicine object
     public PendingIntent generateIntent(Context context)
     {
         Intent intent = new Intent(context, AlarmReceiver.class);
@@ -303,38 +334,5 @@ public class UserMedicine
 
 
        return PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
-
-
-
-    public void restart(Context context)
-    {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.putExtra(MONDAY, monday);
-        intent.putExtra(TUESDAY, tuesday);
-        intent.putExtra(WEDNESDAY, wednesday);
-        intent.putExtra(THURSDAY, thursday);
-        intent.putExtra(FRIDAY, friday);
-        intent.putExtra(SATURDAY, saturday);
-        intent.putExtra(SUNDAY, sunday);
-        intent.putExtra(NAME, name);
-        intent.putExtra(TARGET_NAME, targetName);
-        intent.putExtra(ID, id);
-        intent.putExtra(HOUR, hour);
-        intent.putExtra(MINUTE, minute);
-        intent.putExtra(DURATION, duration);
-
-
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_NO_CREATE);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-
-        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmPendingIntent);
     }
 }

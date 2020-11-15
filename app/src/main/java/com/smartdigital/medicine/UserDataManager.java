@@ -36,8 +36,7 @@ public class UserDataManager
     private Activity activity;
 
 
-    //constructor of the view model
-    //add anything in the constructor to be initialized when the view model is created
+    //constructor for the broadcast receiver to re-enable alarms after certain broadcasts (ie. system reboot)
     public UserDataManager(Context context)
     {
         this.context = context;
@@ -47,6 +46,7 @@ public class UserDataManager
         getUserData();
     }
 
+    //constructor for when the app is running in the foreground
     public UserDataManager(Activity activity, RecyclerView rc)
     {
         this.activity = activity;
@@ -72,23 +72,25 @@ public class UserDataManager
 
     }
 
-    public void restartAlarms(Context context)
+    //re-add alarms to system after reboot
+    public void restartAlarms(Context c)
     {
         new Thread(() ->
         {
             drugs.addAll(db.dao().getAll());
             SystemClock.sleep(10000);
-            restartAlarms(context);
+            restartAlarms(c);
         }).start();
     }
 
+    //re-add alarms to system, will skip alarms that already exist
     private void restartAlarms()
     {
         new Thread(() -> activity.runOnUiThread(() ->
         {
             for (UserMedicine u: drugs)
             {
-                u.restart(context);
+                u.schedule(context);
             }
         })).start();
     }
@@ -117,10 +119,15 @@ public class UserDataManager
 
     }
 
+
+    //check if user drug list contains drug at give position
+    //needed for swipe-to-remove
     public boolean contains(int adapterPosition)
     {
         return drugs.get(adapterPosition) == null;
     }
+
+
     //call this method to remove saved location from the list
     public void remove(int adapterPosition)
     {
@@ -141,8 +148,6 @@ public class UserDataManager
     {
         return this.adapter;
     }
-
-
 
 
 

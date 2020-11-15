@@ -1,6 +1,5 @@
 package com.smartdigital.medicine;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -28,7 +27,7 @@ public class AlarmReceiver extends BroadcastReceiver
     {
         this.context = context;
         String TAG = "alarm";
-        Log.d(TAG, "received");
+        Log.d(TAG, "broadcast received");
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()))
         {
             String toastText = "Alarm Reboot";
@@ -37,8 +36,6 @@ public class AlarmReceiver extends BroadcastReceiver
             new UserDataManager(context).restartAlarms(context);
         }
         else {
-            String toastText = "Alarm Received";
-            Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
             Log.d(TAG, "is alarm today " + alarmIsToday(intent));
             UserMedicine med = new UserMedicine(intent.getExtras());
             if (alarmIsToday(intent))
@@ -51,6 +48,8 @@ public class AlarmReceiver extends BroadcastReceiver
 
     }
 
+
+    //check if alarm should ring today
     private boolean alarmIsToday(Intent intent)
     {
         Calendar calendar = Calendar.getInstance();
@@ -76,6 +75,7 @@ public class AlarmReceiver extends BroadcastReceiver
         return false;
     }
 
+    //display notification
     private void showNotification(String name)
     {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
@@ -90,6 +90,7 @@ public class AlarmReceiver extends BroadcastReceiver
 
 
 
+    //create notification channel for medicine assistant
     private void createNotificationChannel()
     {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)

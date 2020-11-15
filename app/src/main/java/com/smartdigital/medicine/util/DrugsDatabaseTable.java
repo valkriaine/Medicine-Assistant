@@ -2,7 +2,6 @@ package com.smartdigital.medicine.util;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteQueryBuilder;
 
 public class DrugsDatabaseTable
 {
