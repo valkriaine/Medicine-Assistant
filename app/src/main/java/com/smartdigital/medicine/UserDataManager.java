@@ -71,11 +71,14 @@ public class UserDataManager
 
         for (int i = 0; i < 7; i++)
         {
+            Log.d("hahaha", String.valueOf(med.getHour()));
+            Log.d("hahaha", String.valueOf(med.getMinute()));
+            Log.d("hahaha", String.valueOf(i));
             if (daysOfWeek[i])
             {
                 long _id = (long)med.getId();
 
-                AlarmManager alarmManager = (AlarmManager)context.getSystemService(ALARM_SERVICE);
+                AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
                 Calendar calendar = Calendar.getInstance();
 
 
@@ -85,9 +88,8 @@ public class UserDataManager
                 calendar.set(Calendar.MILLISECOND, 0);
                 calendar.set(Calendar.DAY_OF_WEEK, i);
 
-                Intent intent = new Intent(context, MainActivity.class);
-                intent.putExtra("extra", _id);
-                PendingIntent operation = PendingIntent.getActivity(context, med.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                Intent intent = new Intent(context, AlarmReceiver.class);
+                alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
 
                 /** Converting the date and time in to milliseconds elapsed since epoch */
@@ -97,12 +99,8 @@ public class UserDataManager
                     alarm_time += AlarmManager.INTERVAL_DAY * 7;
 
                 assert alarmManager != null;
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
-                        AlarmManager.INTERVAL_DAY * 7, operation);
-
-
-                Toast.makeText(context, "Alarm for " + med.getName() + " is set successfully", Toast.LENGTH_SHORT).show();
-
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, alarm_time,
+                        AlarmManager.INTERVAL_DAY * 7, alarmIntent);
 
                 updateUserData();
             }

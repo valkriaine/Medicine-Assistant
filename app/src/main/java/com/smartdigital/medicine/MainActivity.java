@@ -157,11 +157,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 userDataManager.add(currentMed);
                 SlidingUpPanelLayout drawer = findViewById(R.id.drawer);
                 drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-
-                Log.d("hahaha", "size of list " + dayOfWeekList.length);
-                for (boolean b: dayOfWeekList) {
-                    Log.d("hahaha", String.valueOf(b));
-                }
             }
         }
     }
