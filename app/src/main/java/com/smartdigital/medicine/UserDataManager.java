@@ -1,6 +1,10 @@
 package com.smartdigital.medicine;
 
+import android.app.Activity;
+import android.app.AlarmManager;
 import android.content.Context;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
+import androidx.room.Room;
+import com.smartdigital.medicine.database.UserMedicineDatabase;
+import com.smartdigital.medicine.model.UserMedicine;
+import com.smartdigital.medicine.uihelper.CovertManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 //ViewModel class for managing user data in a singleton manner
 //create an instance of UserDataManager when app starts
@@ -19,44 +28,112 @@ public class UserDataManager
 {
     private final ArrayList <UserMedicine> drugs = new ArrayList<>();
     private final DrugsAdapter adapter;
+    private final UserMedicineDatabase db;
     private final Context context;
+
+    private CovertManager covertManager;
+
+    private Activity activity;
+
 
     //constructor of the view model
     //add anything in the constructor to be initialized when the view model is created
     public UserDataManager(Context context)
     {
         this.context = context;
-        getUserData();
+
         adapter = new DrugsAdapter();
+        db = Room.databaseBuilder(context, UserMedicineDatabase.class, "medicine_database").build();
+        getUserData();
+    }
+
+    public UserDataManager(Activity activity, RecyclerView rc)
+    {
+        this.activity = activity;
+        this.context = activity.getApplicationContext();
+        covertManager = new CovertManager(rc, this);
+        adapter = new DrugsAdapter();
+        db = Room.databaseBuilder(context, UserMedicineDatabase.class, "medicine_database").build();
+        getUserData();
     }
 
     //call this method to retrieve the location list from a local file or a database
     public void getUserData()
     {
-        //todo: get saved medicines here
+        new Thread(() ->
+        {
+            drugs.addAll(db.dao().getAll());
+            activity.runOnUiThread(() ->
+            {
+                adapter.notifyDataSetChanged();
+                restartAlarms();
+            });
+        }).start();
+
     }
 
-    //call this method to save the list to a local file or a database
-    public void updateUserData()
+    public void restartAlarms(Context context)
     {
-        adapter.notifyDataSetChanged();
-        //todo: update current save of user data
+        new Thread(() ->
+        {
+            drugs.addAll(db.dao().getAll());
+            SystemClock.sleep(10000);
+            restartAlarms(context);
+        }).start();
     }
+
+    private void restartAlarms()
+    {
+        new Thread(() -> activity.runOnUiThread(() ->
+        {
+            for (UserMedicine u: drugs)
+            {
+                u.restart(context);
+            }
+        })).start();
+    }
+
 
     //call this method to add a location to the list
     public void add(UserMedicine med)
     {
-        med.setId(drugs.size());
+        for (UserMedicine u: drugs)
+        {
+            if (u.getName().equals(med.getName()) && u.getTargetName().equals(med.getTargetName()))
+                return;
+        }
+
+        med.setId(new Random().nextInt(Integer.MAX_VALUE));
+        while (drugs.contains(med))
+            med.setId(new Random().nextInt(Integer.MAX_VALUE));
+
         med.schedule(context);
-        drugs.add(med);
-        adapter.notifyDataSetChanged();
+        new Thread(() ->
+        {
+            drugs.add(med);
+            db.dao().insert(med);
+            activity.runOnUiThread(adapter::notifyDataSetChanged);
+        }).start();
+
     }
 
-    //call this method to remove saved location from the list
-    public void remove(UserMedicine med)
+    public boolean contains(int adapterPosition)
     {
-        drugs.remove(med);
-        updateUserData();
+        return drugs.get(adapterPosition) == null;
+    }
+    //call this method to remove saved location from the list
+    public void remove(int adapterPosition)
+    {
+        UserMedicine med = drugs.get(adapterPosition);
+        Log.d("isitnull", med.toString());
+        new Thread(() ->
+        {
+            AlarmManager al = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            al.cancel(med.generateIntent(context));
+            drugs.remove(med);
+            db.dao().delete(med);
+            activity.runOnUiThread(adapter::notifyDataSetChanged);
+        }).start();
     }
 
     //return the RecyclerView adapter
@@ -88,6 +165,7 @@ public class UserDataManager
             LocationViewHolder locationViewHolder = (LocationViewHolder)holder;
             locationViewHolder.name.setText(m.getName());
             locationViewHolder.time.setText(m.getHour() + ":" + m.getMinute());
+            covertManager.getCovert().drawCornerFlag(holder, true);
         }
 
         @Override

@@ -32,16 +32,16 @@ public class AlarmReceiver extends BroadcastReceiver
         {
             String toastText = "Alarm Reboot";
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-            //todo: reschedule alarms
+            //reschedule alarms aftr reboot
+            new UserDataManager(context).restartAlarms(context);
         }
         else
             {
             String toastText = "Alarm Received";
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "is alarm today " + alarmIsToday(intent));
+            Log.d(TAG, "is alarm today " + alarmIsToday(intent));
             if (alarmIsToday(intent))
             {
-
                 createNotificationChannel();
                 showNotification(intent.getStringExtra(NAME));
             }

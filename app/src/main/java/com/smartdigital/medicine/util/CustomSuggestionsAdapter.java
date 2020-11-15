@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.smartdigital.medicine.MainActivity;
 import com.smartdigital.medicine.R;
-import com.smartdigital.medicine.UserMedicine;
+import com.smartdigital.medicine.model.SuggestionMedicine;
+import com.smartdigital.medicine.model.UserMedicine;
 import com.valkriaine.factor.HomePager;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
@@ -20,10 +21,10 @@ import java.util.List;
 public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggestionsAdapter.SuggestionViewHolder>
 {
 
-    private final List<UserMedicine> suggestions = new ArrayList<>();
+    private final List<SuggestionMedicine> suggestions = new ArrayList<>();
     private final HomePager homePager;
-    private UserMedicine selectedDrug;
-    private MaterialSearchBar searchBar;
+    private SuggestionMedicine selectedDrug;
+    private final MaterialSearchBar searchBar;
 
     public CustomSuggestionsAdapter(HomePager homePager, MaterialSearchBar searchBar)
     {
@@ -42,7 +43,7 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull SuggestionViewHolder holder, int position) {
-        UserMedicine m = suggestions.get(position);
+        SuggestionMedicine m = suggestions.get(position);
         holder.name.setText(m.getName());
         holder.targetName.setText(m.getTargetName());
     }
@@ -53,7 +54,7 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
         return suggestions.size();
     }
 
-    public void addSuggestions(UserMedicine u)
+    public void addSuggestions(SuggestionMedicine u)
     {
         suggestions.add(u);
         notifyDataSetChanged();
@@ -65,7 +66,7 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
         notifyDataSetChanged();
     }
 
-    public UserMedicine getSelectedDrug()
+    public SuggestionMedicine getSelectedDrug()
     {
         if (selectedDrug != null)
             return this.selectedDrug;
@@ -74,7 +75,7 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
     }
 
 
-    public boolean contains(UserMedicine u)
+    public boolean contains(SuggestionMedicine u)
     {
         return suggestions.contains(u);
     }
@@ -98,7 +99,7 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
         public void onClick(View v) {
             selectedDrug = suggestions.get(getAdapterPosition());
             homePager.setCurrentItem(1, true);
-            MainActivity.currentMed = selectedDrug;
+            MainActivity.currentMed = selectedDrug.toUserMedicine();
             searchBar.clearFocus();
 
         }

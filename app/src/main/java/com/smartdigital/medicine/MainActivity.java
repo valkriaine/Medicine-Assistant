@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.smartdigital.medicine.databinding.ActivityMainBinding;
+import com.smartdigital.medicine.model.SuggestionMedicine;
+import com.smartdigital.medicine.model.UserMedicine;
 import com.smartdigital.medicine.util.CustomSuggestionsAdapter;
 import com.smartdigital.medicine.util.DrugsDatabaseTable;
 import com.smartdigital.medicine.util.OnPageChangeListener;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        userDataManager = new UserDataManager(this);
+        userDataManager = new UserDataManager(this, binding.recyclerview);
 
         //access drugs.db
         drugsDatabaseTable = new DrugsDatabaseTable(this);
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity
                 if (!binding.searchBar.getText().isEmpty()) {
                     c.moveToFirst();
                     while (!c.isAfterLast() && suggestionsAdapter.getItemCount() <= 40) {
-                        UserMedicine u = new UserMedicine(String.valueOf(c.getString(c.getColumnIndex("DRUG_NAME"))), String.valueOf(c.getString(c.getColumnIndex("TARGET_NAME"))));
+                        SuggestionMedicine u = new SuggestionMedicine(String.valueOf(c.getString(c.getColumnIndex("DRUG_NAME"))), String.valueOf(c.getString(c.getColumnIndex("TARGET_NAME"))));
                         if (!suggestionsAdapter.contains(u))
                             suggestionsAdapter.addSuggestions(u);
                         c.moveToNext();
