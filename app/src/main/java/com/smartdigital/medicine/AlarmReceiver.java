@@ -1,5 +1,6 @@
 package com.smartdigital.medicine;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,12 +13,12 @@ import android.util.Log;
 import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import com.smartdigital.medicine.model.UserMedicine;
 
 import java.util.Calendar;
 
 import static com.smartdigital.medicine.util.Constants.*;
 
-//todo: deprecated code
 public class AlarmReceiver extends BroadcastReceiver
 {
     private Context context;
@@ -32,19 +33,20 @@ public class AlarmReceiver extends BroadcastReceiver
         {
             String toastText = "Alarm Reboot";
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
-            //reschedule alarms aftr reboot
+            //reschedule alarms after reboot
             new UserDataManager(context).restartAlarms(context);
         }
-        else
-            {
+        else {
             String toastText = "Alarm Received";
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
             Log.d(TAG, "is alarm today " + alarmIsToday(intent));
+            UserMedicine med = new UserMedicine(intent.getExtras());
             if (alarmIsToday(intent))
             {
                 createNotificationChannel();
-                showNotification(intent.getStringExtra(NAME));
+                showNotification(med.getName());
             }
+            med.reSchedule(context);
         }
 
     }

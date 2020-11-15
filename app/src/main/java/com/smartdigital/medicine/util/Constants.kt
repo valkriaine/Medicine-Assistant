@@ -13,6 +13,14 @@ object Constants {
     const val SUNDAY = "$PACKAGE_NAME.SUNDAY"
 
     const val NAME = "$PACKAGE_NAME.DRUG_NAME"
+    const val TARGET_NAME = "$PACKAGE_NAME.DRUG_TARGET_NAME"
+    const val ID = "$PACKAGE_NAME.ID"
+    const val DURATION = "$PACKAGE_NAME.DURATION"
+    const val HOUR = "$PACKAGE_NAME.HOUR"
+    const val MINUTE = "$PACKAGE_NAME.MINUTE"
+
+
+
 
 
     //NotificationManager

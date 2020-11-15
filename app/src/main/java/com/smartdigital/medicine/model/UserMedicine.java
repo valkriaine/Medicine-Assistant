@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -16,6 +17,7 @@ import java.util.Calendar;
 
 import static com.smartdigital.medicine.util.Constants.*;
 
+//todo: alarm somethings rings somethings doesn't, sometimes rings early
 @Entity
 public class UserMedicine
 {
@@ -239,7 +241,47 @@ public class UserMedicine
     }
 
 
+    @Ignore
+    public UserMedicine(Bundle bundle)
+    {
+        this.id = bundle.getInt(ID);
+        this.name = bundle.getString(NAME);
+        this.targetName = bundle.getString(TARGET_NAME);
+        this.duration = bundle.getFloat(DURATION);
+        this.hour = bundle.getInt(HOUR);
+        this.minute = bundle.getInt(MINUTE);
+        this.monday = bundle.getBoolean(MONDAY);
+        this.tuesday = bundle.getBoolean(TUESDAY);
+        this.wednesday = bundle.getBoolean(WEDNESDAY);
+        this.thursday = bundle.getBoolean(THURSDAY);
+        this.friday = bundle.getBoolean(FRIDAY);
+        this.saturday = bundle.getBoolean(SATURDAY);
+        this.sunday = bundle.getBoolean(SUNDAY);
+    }
 
+
+
+    //add the alarm to system
+    public void schedule(Context context)
+    {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), generateIntent(context));
+    }
+
+    public void reSchedule(Context context)
+    {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + AlarmManager.INTERVAL_DAY, generateIntent(context));
+    }
 
 
     public PendingIntent generateIntent(Context context)
@@ -252,37 +294,19 @@ public class UserMedicine
         intent.putExtra(FRIDAY, friday);
         intent.putExtra(SATURDAY, saturday);
         intent.putExtra(SUNDAY, sunday);
-
         intent.putExtra(NAME, name);
+        intent.putExtra(TARGET_NAME, targetName);
+        intent.putExtra(ID, id);
+        intent.putExtra(HOUR, hour);
+        intent.putExtra(MINUTE, minute);
+        intent.putExtra(DURATION, duration);
+
 
        return PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
 
-    public void schedule(Context context)
-    {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.putExtra(MONDAY, monday);
-        intent.putExtra(TUESDAY, tuesday);
-        intent.putExtra(WEDNESDAY, wednesday);
-        intent.putExtra(THURSDAY, thursday);
-        intent.putExtra(FRIDAY, friday);
-        intent.putExtra(SATURDAY, saturday);
-        intent.putExtra(SUNDAY, sunday);
-
-        intent.putExtra(NAME, name);
-
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(0);
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmPendingIntent);
-    }
 
     public void restart(Context context)
     {
@@ -296,16 +320,21 @@ public class UserMedicine
         intent.putExtra(FRIDAY, friday);
         intent.putExtra(SATURDAY, saturday);
         intent.putExtra(SUNDAY, sunday);
-
         intent.putExtra(NAME, name);
+        intent.putExtra(TARGET_NAME, targetName);
+        intent.putExtra(ID, id);
+        intent.putExtra(HOUR, hour);
+        intent.putExtra(MINUTE, minute);
+        intent.putExtra(DURATION, duration);
+
 
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_NO_CREATE);
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(0);
+        calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, minute);
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, alarmPendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmPendingIntent);
     }
 }

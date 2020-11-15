@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="binding"
@@ -10,7 +10,6 @@
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/drawer"
         android:fitsSystemWindows="true"
@@ -202,11 +201,11 @@
                                     android:orientation="vertical">
 
                                     <com.smartdigital.medicine.util.RobotoBoldTextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="@color/cardview_light_background"
-                                        android:text="@string/medicine_days"
-                                        android:textSize="15sp" />
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@color/cardview_light_background"
+                                            android:text="@string/medicine_days"
+                                            android:textSize="15sp" tools:ignore="TooDeepLayout"/>
 
                                     <androidx.appcompat.widget.AppCompatCheckBox
                                         android:id="@+id/every_day"
