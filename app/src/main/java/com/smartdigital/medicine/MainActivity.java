@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public  int notificationId = 1;
 
     private final float[] positionDuration = {0f};
-    private final float[] positionFrequency = {0f};
 
     private boolean[] dayOfWeekList = new boolean[7];
 
@@ -97,26 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void onClick(View view)
-    {
-
-    }
 
 
 
