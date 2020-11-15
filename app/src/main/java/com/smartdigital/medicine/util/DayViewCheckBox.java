@@ -25,9 +25,9 @@ public class DayViewCheckBox extends AppCompatCheckBox {
     @Override
     public void setChecked(boolean t){
         if(t) {
-            this.setTextColor(Color.WHITE);
+            this.setTextColor(Color.RED);
         } else {
-            this.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+            this.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
         }
         super.setChecked(t);
     }

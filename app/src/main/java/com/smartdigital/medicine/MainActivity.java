@@ -1,34 +1,53 @@
 package com.smartdigital.medicine;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.ramotion.fluidslider.FluidSlider;
+import com.smartdigital.medicine.databinding.ActivityMainBinding;
 import com.smartdigital.medicine.util.CustomSuggestionsAdapter;
+import com.smartdigital.medicine.util.DayViewCheckBox;
 import com.smartdigital.medicine.util.DrugsDatabaseTable;
 import com.smartdigital.medicine.util.OnPageChangeListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.valkriaine.factor.HomePager;
 
+import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
 
-    private final UserDataManager userDataManager = new UserDataManager();
+    private ActivityMainBinding binding;
+
+    private UserDataManager userDataManager;
     private DrugsDatabaseTable drugsDatabaseTable;
     private MaterialSearchBar searchBar;
     private CustomSuggestionsAdapter suggestionsAdapter;
     public static UserMedicine currentMed;
+    public  int notificationId = 1;
 
     private final float[] positionDuration = {0f};
     private final float[] positionFrequency = {0f};
+
+    private boolean[] dayOfWeekList = new boolean[7];
 
     private Cursor c;
 
@@ -36,13 +55,22 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        userDataManager = new UserDataManager(this);
 
         //access drugs.db
         drugsDatabaseTable = new DrugsDatabaseTable(this);
+        for (int i = 0; i < 7; i++)
+        {
+            dayOfWeekList[i] = false;
+        }
 
 
         initializeComponents();
+
+
+
+
 
 
 
@@ -53,22 +81,108 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void onClick(View view)
+    {
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void confirmAddDrug(View view)
     {
         if (currentMed != null)
         {
             currentMed.setDuration(positionDuration[0]);
-            currentMed.setFrequency(positionFrequency[0]);
-            if (currentMed.getDuration() != 0 && currentMed.getFrequency() != 0)
+            if (currentMed.getDuration() != 0)
             {
+                currentMed.setHour(binding.timePicker.getHour());
+                currentMed.setMinute(binding.timePicker.getMinute());
+                currentMed.setDayOfWeekList(dayOfWeekList);
                 userDataManager.add(currentMed);
                 SlidingUpPanelLayout drawer = findViewById(R.id.drawer);
                 drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+
+                Log.d("hahaha", "size of list " + dayOfWeekList.length);
+                for (boolean b: dayOfWeekList) {
+                    Log.d("hahaha", String.valueOf(b));
+                }
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void initializeComponents()
     {
         //setup HomePager
@@ -141,5 +255,100 @@ public class MainActivity extends AppCompatActivity
             durationText.setText("I am taking medicine for: " + positionDuration[0] + " days.");
             return null;
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    public void onCheckboxClicked(View view)
+    {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        /** Checking which checkbox was clicked */
+        switch (view.getId()) {
+            case R.id.dv_monday:
+                if (checked) {
+                    dayOfWeekList[1] = true;
+                } else {
+                    dayOfWeekList[1] = false;
+                    binding.everyDay.setChecked(false);
+                }
+                break;
+            case R.id.dv_tuesday:
+                if (checked) {
+                    dayOfWeekList[2] = true;
+                } else {
+                    dayOfWeekList[2] = false;
+                    binding.everyDay.setChecked(false);
+                }
+                break;
+            case R.id.dv_wednesday:
+                if (checked) {
+                    dayOfWeekList[3] = true;
+                } else {
+                    dayOfWeekList[3] = false;
+                    binding.everyDay.setChecked(false);
+                }
+                break;
+            case R.id.dv_thursday:
+                if (checked) {
+                    dayOfWeekList[4] = true;
+                } else {
+                    dayOfWeekList[4] = false;
+                    binding.everyDay.setChecked(false);
+                }
+                break;
+            case R.id.dv_friday:
+                if (checked) {
+                    dayOfWeekList[5] = true;
+                } else {
+                    dayOfWeekList[5] = false;
+                    binding.everyDay.setChecked(false);
+                }
+                break;
+            case R.id.dv_saturday:
+                if (checked) {
+                    dayOfWeekList[6] = true;
+                } else {
+                    dayOfWeekList[6] = false;
+                    binding.everyDay.setChecked(false);
+                }
+                break;
+            case R.id.dv_sunday:
+                if (checked) {
+                    dayOfWeekList[0] = true;
+                } else {
+                    dayOfWeekList[0] = false;
+                    binding.everyDay.setChecked(false);
+                }
+                break;
+            case R.id.every_day:
+                binding.dvMonday.setChecked(checked);
+                binding.dvTuesday.setChecked(checked);
+                binding.dvWednesday.setChecked(checked);
+                binding.dvThursday.setChecked(checked);
+                binding.dvFriday.setChecked(checked);
+                binding.dvSaturday.setChecked(checked);
+                binding.dvSunday.setChecked(checked);
+                for (int i = 0; i < 7; i ++)
+                {
+                    dayOfWeekList[i] = checked;
+                }
+                break;
+        }
     }
 }

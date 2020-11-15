@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Medicine</string>
     <string name="app_title">Medicine Assistant</string>
+    <string name="medicine_days">Medicine Days</string>
+    <string name="confirm">Confirm</string>
+    <string name="camera_search">Camera Search</string>
+    <string name="_1_0">1.0</string>
 </resources>

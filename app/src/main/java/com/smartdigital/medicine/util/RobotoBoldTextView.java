@@ -7,8 +7,6 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatTextView;
 
 
-
-
 public class RobotoBoldTextView extends AppCompatTextView {
 
     public RobotoBoldTextView(Context context) {
