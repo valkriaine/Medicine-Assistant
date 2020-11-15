@@ -214,7 +214,7 @@
                                         android:layout_height="wrap_content"
                                         android:background="@drawable/background_day_view"
                                         android:onClick="onCheckboxClicked"
-                                        android:text="every_day" />
+                                        android:text="every day" />
 
                                     <LinearLayout
                                         android:id="@+id/checkbox_layout"
@@ -232,7 +232,6 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:onClick="onCheckboxClicked"
                                             android:text="S" />
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
@@ -244,7 +243,6 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:onClick="onCheckboxClicked"
                                             android:text="M" />
 
 
@@ -257,7 +255,6 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:onClick="onCheckboxClicked"
                                             android:text="T" />
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
@@ -269,7 +266,6 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:onClick="onCheckboxClicked"
                                             android:text="W" />
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
@@ -281,7 +277,6 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:onClick="onCheckboxClicked"
                                             android:text="T" />
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
@@ -293,7 +288,6 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:onClick="onCheckboxClicked"
                                             android:text="F" />
 
 
@@ -306,7 +300,6 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:onClick="onCheckboxClicked"
                                             android:text="S" />
                                     </LinearLayout>
 

@@ -5,6 +5,9 @@
     <!--need to ask users permission to access camera and storage -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- it is not required to have a camera-->
     <uses-feature android:name="android.hardware.camera"
@@ -32,8 +35,11 @@
             </intent-filter>
         </activity>
 
-
-        <receiver android:name=".AlarmReceiver" android:enabled="true"/>
+        <receiver android:name=".AlarmReceiver" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 
