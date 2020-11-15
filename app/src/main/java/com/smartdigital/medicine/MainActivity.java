@@ -1,38 +1,29 @@
 package com.smartdigital.medicine;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.ramotion.fluidslider.FluidSlider;
 import com.smartdigital.medicine.databinding.ActivityMainBinding;
 import com.smartdigital.medicine.util.CustomSuggestionsAdapter;
-import com.smartdigital.medicine.util.DayViewCheckBox;
 import com.smartdigital.medicine.util.DrugsDatabaseTable;
 import com.smartdigital.medicine.util.OnPageChangeListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.valkriaine.factor.HomePager;
 
-import java.util.Calendar;
 
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener
+public class MainActivity extends AppCompatActivity
 {
 
     private ActivityMainBinding binding;
