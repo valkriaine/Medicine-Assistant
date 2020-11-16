@@ -96,12 +96,12 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
 
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
             selectedDrug = suggestions.get(getAdapterPosition());
-            homePager.setCurrentItem(1, true);
             MainActivity.currentMed = selectedDrug.toUserMedicine();
+            homePager.setCurrentItem(1, true);
             searchBar.clearFocus();
-
         }
     }
 }

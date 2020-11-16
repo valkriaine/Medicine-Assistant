@@ -285,6 +285,12 @@ public class UserMedicine
                 "sunday: " + sunday + "\n";
     }
 
+    public String getInfo()
+    {
+        return name + " \n" + targetName;
+    }
+
+
 
 
 

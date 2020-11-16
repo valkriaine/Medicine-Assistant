@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -89,6 +90,8 @@ public class MainActivity extends AppCompatActivity
                 SlidingUpPanelLayout drawer = findViewById(R.id.drawer);
                 drawer.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
             }
+            else
+                Toast.makeText(this, "Please set a duration", Toast.LENGTH_SHORT).show();
         }
         else
             Toast.makeText(this, "Please setup the medicine", Toast.LENGTH_SHORT).show();
@@ -165,10 +168,7 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-       binding.openCamera.setOnClickListener(view -> {
-           dispatchTakePictureIntent();
-           //textView.setText("");
-       });
+       binding.openCamera.setOnClickListener(view -> dispatchTakePictureIntent());
     }
 
 
@@ -207,15 +207,13 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    private void readTextFromImage() {
+    private void readTextFromImage()
+    {
         FirebaseVisionImage firstFirebaseVisionImage= FirebaseVisionImage.fromBitmap(imageBitmap);
         FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getCloudTextRecognizer();
         detector.processImage(firstFirebaseVisionImage)
-                .addOnSuccessListener(firebaseVisionText -> displayTextFromImage(firebaseVisionText)).addOnFailureListener(e -> {
-
-        });
-
-
+                .addOnSuccessListener(this::displayTextFromImage)
+                .addOnFailureListener(e -> Log.d("image_fail", e.getMessage()));
     }
 
 
@@ -225,26 +223,34 @@ public class MainActivity extends AppCompatActivity
     {
         int lastSuggestionCount = 0;
         String searchText = "";
+        String text = "unknown";
         List<FirebaseVisionText.TextBlock> blockList = firebaseVisionText.getTextBlocks();
         if(blockList.size()==0){
             Toast.makeText(this, "no text in the image", Toast.LENGTH_SHORT);
         }
-        else
-            {
+        else {
             for(FirebaseVisionText.TextBlock block : firebaseVisionText.getTextBlocks())
             {
-                String text = block.getText();
-                binding.searchBar.setText(text);
-                binding.searchBar.requestFocus();
-
-                if (suggestionsAdapter.getItemCount() != 0 && suggestionsAdapter.getItemCount() > lastSuggestionCount)
+                text = block.getText();
+                Cursor cursor = drugsDatabaseTable.getWordMatches(text);
+                if (cursor.getCount() > lastSuggestionCount)
                 {
-                    lastSuggestionCount = suggestionsAdapter.getItemCount();
-                    searchText = block.getText();
+                    lastSuggestionCount = cursor.getCount();
+                    searchText = text;
                 }
             }
 
-            //no search result
+            if (!searchText.equals(""))
+            {
+                binding.searchBar.setText(searchText);
+                binding.searchBar.requestFocus();
+            }
+            else
+            {
+                Toast.makeText(this, "no record found, but you may still add this medicine to your routines!", Toast.LENGTH_SHORT).show();
+                currentMed = new UserMedicine(text, text);
+                binding.viewPager.setCurrentItem(1, true);
+            }
 
         }
     }

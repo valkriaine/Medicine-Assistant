@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.view.View
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
+import com.smartdigital.medicine.MainActivity.currentMed
 import java.lang.Exception
 
 //attach this on the HomePager to animate search bar
@@ -30,7 +31,7 @@ class OnPageChangeListener(private var objectToAnimate: View,
         {
             suggestionList.clear()
             try {
-                title.text = suggestionList.selectedDrug.toString()
+                title.text = currentMed.info
             }
             catch (e: Exception)
             {
