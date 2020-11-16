@@ -224,8 +224,7 @@ public class MainActivity extends AppCompatActivity
     private void displayTextFromImage(FirebaseVisionText firebaseVisionText)
     {
         int lastSuggestionCount = 0;
-        String searchText = "";
-        String text = "unknown";
+        String read = "unknown";
         List<FirebaseVisionText.TextBlock> blockList = firebaseVisionText.getTextBlocks();
         if(blockList.size()==0){
             Toast.makeText(this, "no text in the image", Toast.LENGTH_SHORT);
@@ -233,24 +232,32 @@ public class MainActivity extends AppCompatActivity
         else {
             for(FirebaseVisionText.TextBlock block : firebaseVisionText.getTextBlocks())
             {
-                text = block.getText();
-                Cursor cursor = drugsDatabaseTable.getWordMatches(text);
-                if (cursor.getCount() > lastSuggestionCount)
+                int count = 0;
+                String text = block.getText();
+                read = text;
+
+                Cursor cursor = drugsDatabaseTable.getWordMatches(text.trim());
+
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast() && suggestionsAdapter.getItemCount() <= 40)
                 {
-                    lastSuggestionCount = cursor.getCount();
-                    searchText = text;
+                    SuggestionMedicine u = new SuggestionMedicine(String.valueOf(cursor.getString(cursor.getColumnIndex("DRUG_NAME"))), String.valueOf(cursor.getString(cursor.getColumnIndex("TARGET_NAME"))));
+                    if (!suggestionsAdapter.contains(u)) {
+                        suggestionsAdapter.addSuggestions(u);
+                        count ++;
+                    }
+                    cursor.moveToNext();
+
                 }
+                if (count > lastSuggestionCount)
+                    lastSuggestionCount = count;
+
             }
 
-            if (!searchText.equals(""))
-            {
-                binding.searchBar.setText(searchText);
-                binding.searchBar.requestFocus();
-            }
-            else
+            if (lastSuggestionCount == 0)
             {
                 Toast.makeText(this, "no record found, but you may still add this medicine to your routines!", Toast.LENGTH_SHORT).show();
-                currentMed = new UserMedicine(text, text);
+                currentMed = new UserMedicine(read, read);
                 binding.viewPager.setCurrentItem(1, true);
             }
 
