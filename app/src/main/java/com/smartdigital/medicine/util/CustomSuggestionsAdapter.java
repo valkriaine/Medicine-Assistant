@@ -7,12 +7,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.smartdigital.medicine.MainActivity;
 import com.smartdigital.medicine.R;
 import com.smartdigital.medicine.model.SuggestionMedicine;
-import com.smartdigital.medicine.model.UserMedicine;
-import com.valkriaine.factor.HomePager;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +21,10 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
 {
 
     private final List<SuggestionMedicine> suggestions = new ArrayList<>();
-    private final HomePager homePager;
-    private SuggestionMedicine selectedDrug;
+    private final ViewPager homePager;
     private final MaterialSearchBar searchBar;
 
-    public CustomSuggestionsAdapter(HomePager homePager, MaterialSearchBar searchBar)
+    public CustomSuggestionsAdapter(ViewPager homePager, MaterialSearchBar searchBar)
     {
         this.homePager = homePager;
         this.searchBar = searchBar;
@@ -66,14 +64,6 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
         notifyDataSetChanged();
     }
 
-    public SuggestionMedicine getSelectedDrug()
-    {
-        if (selectedDrug != null)
-            return this.selectedDrug;
-        else
-            return null;
-    }
-
 
     public boolean contains(SuggestionMedicine u)
     {
@@ -98,7 +88,7 @@ public class CustomSuggestionsAdapter extends RecyclerView.Adapter<CustomSuggest
         @Override
         public void onClick(View v)
         {
-            selectedDrug = suggestions.get(getAdapterPosition());
+            SuggestionMedicine selectedDrug = suggestions.get(getAdapterPosition());
             MainActivity.currentMed = selectedDrug.toUserMedicine();
             homePager.setCurrentItem(1, true);
             searchBar.clearFocus();

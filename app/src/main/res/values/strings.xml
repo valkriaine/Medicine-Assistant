@@ -5,4 +5,15 @@
     <string name="confirm">Confirm</string>
     <string name="camera_search">Camera Search</string>
     <string name="_1_0">1.0</string>
+    <string name="drug_text_placeholder">No drug info</string>
+    <string name="duration_text_placeholder">I am taking medicine for:</string>
+    <string name="every_day">every day</string>
+    <string name="sunday">S</string>
+    <string name="monday">M</string>
+    <string name="tuesday">T</string>
+    <string name="wednesday">W</string>
+    <string name="thursday">T</string>
+    <string name="friday">F</string>
+    <string name="saturday">S</string>
+    <string name="drawer_title">My medicines</string>
 </resources>

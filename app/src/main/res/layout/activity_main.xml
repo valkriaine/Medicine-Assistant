@@ -172,7 +172,6 @@
                                 android:layout_marginVertical="10dp"
                                 android:layout_width="match_parent"
                                 android:textSize="30sp"
-                                android:text="display drug information here"
                                 android:layout_marginHorizontal="50dp"
                                 android:layout_height="180dp"
                                 android:gravity="start"/>
@@ -180,7 +179,7 @@
 
                             <TextView
                                 android:id="@+id/duration_text"
-                                android:text="I am taking medicine for:"
+                                android:text="@string/duration_text_placeholder"
                                 android:textSize="20sp"
                                 android:textColor="#FFFFFF"
                                 android:gravity="start"
@@ -199,12 +198,42 @@
                                 android:layout_marginHorizontal="50dp"/>
 
 
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="50dp"
+                                    android:layout_marginTop="30dp">
+
+                                <TextView
+                                        android:id="@+id/medicine_day"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        android:text="@string/medicine_days"
+                                        android:textSize="20sp"
+                                        android:textColor="#FFFFFF"
+                                        android:gravity="center_horizontal"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+
+
+                                <androidx.appcompat.widget.AppCompatCheckBox
+                                        android:id="@+id/every_day"
+                                        android:textSize="15sp"
+                                        android:textColor="#FFFFFF"
+                                        android:gravity="center_vertical"
+                                        android:textAlignment="gravity"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:onClick="onCheckboxClicked"
+                                        android:text="@string/every_day" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 
-
-                            <!--todo: add alarm clock here to setup time of day-->
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="match_parent"
@@ -215,26 +244,6 @@
                                 app:cardUseCompatPadding="true"
                                 app:contentPadding="16dp">
 
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <com.smartdigital.medicine.util.RobotoBoldTextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:background="@color/cardview_light_background"
-                                            android:text="@string/medicine_days"
-                                            android:textSize="15sp" tools:ignore="TooDeepLayout"/>
-
-                                    <androidx.appcompat.widget.AppCompatCheckBox
-                                        android:id="@+id/every_day"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:background="@drawable/background_day_view"
-                                        android:onClick="onCheckboxClicked"
-                                        android:text="every day" />
-
                                     <LinearLayout
                                         android:id="@+id/checkbox_layout"
                                         android:layout_width="match_parent"
@@ -243,15 +252,16 @@
                                         android:weightSum="7">
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
-                                            android:id="@+id/dv_sunday"
-                                            android:layout_width="40dp"
-                                            android:layout_height="40dp"
-                                            android:layout_margin="4dp"
-                                            android:layout_weight="1"
-                                            android:background="@drawable/background_day_view"
-                                            android:button="@null"
-                                            android:gravity="center"
-                                            android:text="S" />
+                                                android:id="@+id/dv_sunday"
+                                                android:layout_width="40dp"
+                                                android:layout_height="40dp"
+                                                android:layout_margin="4dp"
+                                                android:layout_weight="1"
+                                                android:background="@drawable/background_day_view"
+                                                android:button="@null"
+                                                android:gravity="center"
+                                                android:onClick="check"
+                                                android:text="@string/sunday" tools:ignore="TooDeepLayout"/>
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
                                             android:id="@+id/dv_monday"
@@ -262,7 +272,8 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:text="M" />
+                                            android:onClick="check"
+                                            android:text="@string/monday" />
 
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
@@ -274,7 +285,8 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:text="T" />
+                                            android:onClick="check"
+                                            android:text="@string/tuesday" />
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
                                             android:id="@+id/dv_wednesday"
@@ -285,7 +297,8 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:text="W" />
+                                            android:onClick="check"
+                                            android:text="@string/wednesday" />
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
                                             android:id="@+id/dv_thursday"
@@ -296,7 +309,8 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:text="T" />
+                                            android:onClick="check"
+                                            android:text="@string/thursday" />
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
                                             android:id="@+id/dv_friday"
@@ -307,7 +321,8 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:text="F" />
+                                            android:onClick="check"
+                                            android:text="@string/friday" />
 
 
                                         <com.smartdigital.medicine.util.DayViewCheckBox
@@ -319,10 +334,10 @@
                                             android:background="@drawable/background_day_view"
                                             android:button="@null"
                                             android:gravity="center"
-                                            android:text="S" />
+                                            android:onClick="check"
+                                            android:text="@string/saturday" />
                                     </LinearLayout>
 
-                                </LinearLayout>
                             </androidx.cardview.widget.CardView>
 
 
@@ -398,7 +413,7 @@
                         android:id="@+id/dummyText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="My medicines"
+                        android:text="@string/drawer_title"
                         android:textSize="20sp"
                         android:layout_marginTop="20dp"
                         android:gravity="center_horizontal"

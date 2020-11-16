@@ -25,6 +25,7 @@ import com.smartdigital.medicine.databinding.ActivityMainBinding;
 import com.smartdigital.medicine.model.SuggestionMedicine;
 import com.smartdigital.medicine.model.UserMedicine;
 import com.smartdigital.medicine.util.CustomSuggestionsAdapter;
+import com.smartdigital.medicine.util.DayViewCheckBox;
 import com.smartdigital.medicine.util.DrugsDatabaseTable;
 import com.smartdigital.medicine.util.OnPageChangeListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
@@ -110,13 +111,14 @@ public class MainActivity extends AppCompatActivity
         binding.viewPager.addView(binding.searchPage, 0);
         binding.viewPager.addView(binding.setupPage, 1);
 
+        binding.viewPager.setSwipeAllowed(false);
         binding.searchBar.setSuggestionsEnabled(false);
 
         //setup search bar suggestions
         suggestionsAdapter = new CustomSuggestionsAdapter(binding.viewPager, binding.searchBar);
         binding.suggestionsList.setLayoutManager(new LinearLayoutManager(this));
         binding.suggestionsList.setAdapter(suggestionsAdapter);
-        binding.viewPager.addOnPageChangeListener(new OnPageChangeListener(binding.searchBox, suggestionsAdapter, binding.drugName));
+        binding.viewPager.addOnPageChangeListener(new OnPageChangeListener(binding.searchBox, suggestionsAdapter, binding.drugName, binding.viewPager, this));
 
         //search for drug after text change in the search bar
         binding.searchBar.addTextChangeListener(new TextWatcher()
@@ -257,20 +259,11 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
-
-
-
-
-
-
-
-
-
     //click event for "every day"
     public void onCheckboxClicked(View view)
     {
-        boolean checked = ((CheckBox) view).isChecked();
+        CheckBox c = (CheckBox) view;
+        boolean checked = c.isChecked();
         binding.dvMonday.setChecked(checked);
         binding.dvTuesday.setChecked(checked);
         binding.dvWednesday.setChecked(checked);
@@ -281,18 +274,22 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void check(View view)
+    {
+        DayViewCheckBox d = (DayViewCheckBox) view;
+        boolean checked = d.isChecked();
+        if (!checked)
+            binding.everyDay.setChecked(false);
+        else
+        {
+            if (binding.dvMonday.isChecked() &&
+                    binding.dvTuesday.isChecked() &&
+                    binding.dvWednesday.isChecked() &&
+                    binding.dvThursday.isChecked() &&
+                    binding.dvFriday.isChecked() &&
+                    binding.dvSaturday.isChecked() &&
+                    binding.dvSunday.isChecked())
+                binding.everyDay.setChecked(true);
+        }
+    }
 }
