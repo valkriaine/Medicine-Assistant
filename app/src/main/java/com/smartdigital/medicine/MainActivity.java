@@ -1,15 +1,25 @@
 package com.smartdigital.medicine;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 import com.smartdigital.medicine.databinding.ActivityMainBinding;
 import com.smartdigital.medicine.model.SuggestionMedicine;
 import com.smartdigital.medicine.model.UserMedicine;
@@ -17,6 +27,8 @@ import com.smartdigital.medicine.util.CustomSuggestionsAdapter;
 import com.smartdigital.medicine.util.DrugsDatabaseTable;
 import com.smartdigital.medicine.util.OnPageChangeListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
@@ -27,6 +39,10 @@ public class MainActivity extends AppCompatActivity
     private DrugsDatabaseTable drugsDatabaseTable;
     private CustomSuggestionsAdapter suggestionsAdapter;
     public static UserMedicine currentMed;
+
+    private Bitmap imageBitmap;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private final float[] positionDuration = {0f};
 
@@ -147,7 +163,102 @@ public class MainActivity extends AppCompatActivity
             binding.durationText.setText("I am taking medicine for: " + positionDuration[0] + " days.");
             return null;
         });
+
+
+       binding.openCamera.setOnClickListener(view -> {
+           dispatchTakePictureIntent();
+           //textView.setText("");
+       });
     }
+
+
+
+
+
+    private void dispatchTakePictureIntent()
+    {
+
+        int permissionCheck = ContextCompat.checkSelfPermission(binding.cameraImage.getContext(), Manifest.permission.CAMERA);
+        if(permissionCheck!= PackageManager.PERMISSION_GRANTED)
+        {
+            requestPermissions(new String[] {Manifest.permission.CAMERA}, 1888);
+        }
+        else
+            {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if(takePictureIntent.resolveActivity(getPackageManager())!=null){
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        }
+    }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            imageBitmap = (Bitmap) extras.get("data");
+            binding.cameraImage.setImageBitmap(imageBitmap);
+            readTextFromImage();
+        }
+    }
+
+
+
+
+    private void readTextFromImage() {
+        FirebaseVisionImage firstFirebaseVisionImage= FirebaseVisionImage.fromBitmap(imageBitmap);
+        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance().getCloudTextRecognizer();
+        detector.processImage(firstFirebaseVisionImage)
+                .addOnSuccessListener(firebaseVisionText -> displayTextFromImage(firebaseVisionText)).addOnFailureListener(e -> {
+
+        });
+
+
+    }
+
+
+
+
+    private void displayTextFromImage(FirebaseVisionText firebaseVisionText)
+    {
+        int lastSuggestionCount = 0;
+        String searchText = "";
+        List<FirebaseVisionText.TextBlock> blockList = firebaseVisionText.getTextBlocks();
+        if(blockList.size()==0){
+            Toast.makeText(this, "no text in the image", Toast.LENGTH_SHORT);
+        }
+        else
+            {
+            for(FirebaseVisionText.TextBlock block : firebaseVisionText.getTextBlocks())
+            {
+                String text = block.getText();
+                binding.searchBar.setText(text);
+                binding.searchBar.requestFocus();
+
+                if (suggestionsAdapter.getItemCount() != 0 && suggestionsAdapter.getItemCount() > lastSuggestionCount)
+                {
+                    lastSuggestionCount = suggestionsAdapter.getItemCount();
+                    searchText = block.getText();
+                }
+            }
+
+            //no search result
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
     //click event for "every day"
@@ -163,4 +274,19 @@ public class MainActivity extends AppCompatActivity
         binding.dvSunday.setChecked(checked);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
