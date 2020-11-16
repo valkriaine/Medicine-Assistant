@@ -251,7 +251,7 @@
                                         android:orientation="horizontal"
                                         android:weightSum="7">
 
-                                        <com.smartdigital.medicine.util.DayViewCheckBox
+                                        <com.smartdigital.medicine.ui.DayViewCheckBox
                                                 android:id="@+id/dv_sunday"
                                                 android:layout_width="40dp"
                                                 android:layout_height="40dp"
@@ -263,7 +263,7 @@
                                                 android:onClick="check"
                                                 android:text="@string/sunday" tools:ignore="TooDeepLayout"/>
 
-                                        <com.smartdigital.medicine.util.DayViewCheckBox
+                                        <com.smartdigital.medicine.ui.DayViewCheckBox
                                             android:id="@+id/dv_monday"
                                             android:layout_width="40dp"
                                             android:layout_height="40dp"
@@ -276,7 +276,7 @@
                                             android:text="@string/monday" />
 
 
-                                        <com.smartdigital.medicine.util.DayViewCheckBox
+                                        <com.smartdigital.medicine.ui.DayViewCheckBox
                                             android:id="@+id/dv_tuesday"
                                             android:layout_width="40dp"
                                             android:layout_height="40dp"
@@ -288,7 +288,7 @@
                                             android:onClick="check"
                                             android:text="@string/tuesday" />
 
-                                        <com.smartdigital.medicine.util.DayViewCheckBox
+                                        <com.smartdigital.medicine.ui.DayViewCheckBox
                                             android:id="@+id/dv_wednesday"
                                             android:layout_width="40dp"
                                             android:layout_height="40dp"
@@ -300,7 +300,7 @@
                                             android:onClick="check"
                                             android:text="@string/wednesday" />
 
-                                        <com.smartdigital.medicine.util.DayViewCheckBox
+                                        <com.smartdigital.medicine.ui.DayViewCheckBox
                                             android:id="@+id/dv_thursday"
                                             android:layout_width="40dp"
                                             android:layout_height="40dp"
@@ -312,7 +312,7 @@
                                             android:onClick="check"
                                             android:text="@string/thursday" />
 
-                                        <com.smartdigital.medicine.util.DayViewCheckBox
+                                        <com.smartdigital.medicine.ui.DayViewCheckBox
                                             android:id="@+id/dv_friday"
                                             android:layout_width="40dp"
                                             android:layout_height="40dp"
@@ -325,7 +325,7 @@
                                             android:text="@string/friday" />
 
 
-                                        <com.smartdigital.medicine.util.DayViewCheckBox
+                                        <com.smartdigital.medicine.ui.DayViewCheckBox
                                             android:id="@+id/dv_saturday"
                                             android:layout_width="40dp"
                                             android:layout_height="40dp"

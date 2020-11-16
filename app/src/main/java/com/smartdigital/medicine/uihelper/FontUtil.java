@@ -1,6 +1,7 @@
-package com.smartdigital.medicine.util;
+package com.smartdigital.medicine.uihelper;
 
 import android.graphics.Typeface;
+import com.smartdigital.medicine.util.MedicineApp;
 
 import java.util.Hashtable;
 

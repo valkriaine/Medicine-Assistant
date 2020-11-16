@@ -1,4 +1,4 @@
-package com.smartdigital.medicine.util;
+package com.smartdigital.medicine.ui;
 
 import android.content.Context;
 import android.graphics.Color;

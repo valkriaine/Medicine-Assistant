@@ -25,9 +25,9 @@ import com.smartdigital.medicine.databinding.ActivityMainBinding;
 import com.smartdigital.medicine.model.SuggestionMedicine;
 import com.smartdigital.medicine.model.UserMedicine;
 import com.smartdigital.medicine.util.CustomSuggestionsAdapter;
-import com.smartdigital.medicine.util.DayViewCheckBox;
-import com.smartdigital.medicine.util.DrugsDatabaseTable;
-import com.smartdigital.medicine.util.OnPageChangeListener;
+import com.smartdigital.medicine.ui.DayViewCheckBox;
+import com.smartdigital.medicine.database.DrugsDatabaseTable;
+import com.smartdigital.medicine.uihelper.OnPageChangeListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.List;

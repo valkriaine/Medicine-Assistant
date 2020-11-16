@@ -1,4 +1,4 @@
-package com.smartdigital.medicine.util
+package com.smartdigital.medicine.database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

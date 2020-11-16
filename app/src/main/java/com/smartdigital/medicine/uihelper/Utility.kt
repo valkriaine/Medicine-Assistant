@@ -1,4 +1,4 @@
-package com.smartdigital.medicine.util
+package com.smartdigital.medicine.uihelper
 
 import android.animation.ObjectAnimator
 import android.content.Context
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.smartdigital.medicine.MainActivity.currentMed
 import com.smartdigital.medicine.R
+import com.smartdigital.medicine.util.CustomSuggestionsAdapter
 import java.lang.Exception
 
 //attach this on the HomePager to animate search bar

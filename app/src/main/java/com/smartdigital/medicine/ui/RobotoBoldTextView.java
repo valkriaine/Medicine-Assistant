@@ -1,10 +1,11 @@
-package com.smartdigital.medicine.util;
+package com.smartdigital.medicine.ui;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatTextView;
+import com.smartdigital.medicine.uihelper.FontUtil;
 
 
 public class RobotoBoldTextView extends AppCompatTextView {
