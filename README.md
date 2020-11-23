@@ -17,6 +17,9 @@ User can add medicine name or scann the Medicine, and set time to remind per dos
 * can see notification
 
 ## Screenshoots
+### Main Page
+
+![image](https://user-images.githubusercontent.com/64863436/100025796-5ccdb580-2d9e-11eb-8fbd-14a841c245db.png)
 
 ## 📱 Get the Showroom App for Android to give it a try
 <a href="https://play.google.com/store/apps/details?id=com.ramotion.showroom" >
