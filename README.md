@@ -1,6 +1,6 @@
 # Medicine Assistant
 
-Medi Assistant is a android application that will assist patient to remind to take medicine .
+Medicine Assistant is a android application that will assist patient to remind to take medicine .
 This application will remind as notification  to remind patient to take medicine.
 
 
