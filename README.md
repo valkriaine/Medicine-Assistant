@@ -17,7 +17,7 @@ User can add medicine name or scann the Medicine, and set time to remind per dos
 * can see notification
 
 ## Screenshoots
-### Main Page
+#### Main Page
 
 ![image](https://user-images.githubusercontent.com/64863436/100025796-5ccdb580-2d9e-11eb-8fbd-14a841c245db.png)
 
