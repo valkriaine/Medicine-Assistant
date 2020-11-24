@@ -37,7 +37,7 @@ User can add medicine name or scann the Medicine, and set time to remind per dos
 
 ##  License
 
-## 📱 Get the Showroom App for Android to give it a try
+
 <a href="https://play.google.com/store/apps/details?id=com.ramotion.showroom" >
 <img src="https://raw.githubusercontent.com/Ramotion/react-native-circle-menu/master/google_play@2x.png" width="104" height="34"></a>
 
