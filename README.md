@@ -13,7 +13,6 @@ User can add medicine name or scann the Medicine, and set time to remind per dos
 * User can add reminder of a medicine
 * user can see reminder of upcoming medicine
 * list of medicine to take
-* can see notification
 
 ## Screenshoots
 #### Main Page
