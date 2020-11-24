@@ -1,8 +1,8 @@
 # Medicine Assistant
 
-Medicine Assistant is a android application that will assist patient to remind to take medicine .
-This application will remind as notification  to remind patient to take medicine.
+Medicine Assistant is an android application that will assist the patient to remind to take medicine. This application will remind as a notification to remind patients to take medicine.
 
+Follow us on [Facebook](https://www.facebook.com/Medicine-Assistant-106108904666969 )
 
 User can add medicine name or scann the Medicine, and set time to remind per dose everyday.
 
