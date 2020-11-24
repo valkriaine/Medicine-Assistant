@@ -29,7 +29,7 @@ User can add medicine name or scann the Medicine, and set time to remind per dos
 ![image](https://user-images.githubusercontent.com/64863436/100049539-6d952000-2dcc-11eb-840d-84f68f89e40c.png)
 #### Period Setting
 ![image](https://user-images.githubusercontent.com/64863436/100049581-88679480-2dcc-11eb-8e2f-b6f16bdc347d.png)
-#### Week Days Setting
+#### Week Days and Time Setting
 
 ![image](https://user-images.githubusercontent.com/64863436/100049205-a1237a80-2dcb-11eb-9e5e-3fe7b249cbeb.png)
 #### Medicine List
