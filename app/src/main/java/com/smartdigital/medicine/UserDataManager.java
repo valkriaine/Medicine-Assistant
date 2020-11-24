@@ -66,7 +66,7 @@ public class UserDataManager
             activity.runOnUiThread(() ->
             {
                 adapter.notifyDataSetChanged();
-                restartAlarms();
+                //restartAlarms();
             });
         }).start();
 
