@@ -63,11 +63,7 @@ public class UserDataManager
         new Thread(() ->
         {
             drugs.addAll(db.dao().getAll());
-            activity.runOnUiThread(() ->
-            {
-                adapter.notifyDataSetChanged();
-                //restartAlarms();
-            });
+            activity.runOnUiThread(adapter::notifyDataSetChanged);
         }).start();
 
     }
@@ -83,7 +79,7 @@ public class UserDataManager
         }).start();
     }
 
-    //re-add alarms to system, will skip alarms that already exist
+    //re-add alarms to system
     private void restartAlarms()
     {
         new Thread(() -> activity.runOnUiThread(() ->
@@ -120,7 +116,7 @@ public class UserDataManager
     }
 
 
-    //check if user drug list contains drug at give position
+    //check if user pill list contains pill at give position
     //needed for swipe-to-remove
     public boolean contains(int adapterPosition)
     {
@@ -132,7 +128,6 @@ public class UserDataManager
     public void remove(int adapterPosition)
     {
         UserMedicine med = drugs.get(adapterPosition);
-        Log.d("isitnull", med.toString());
         new Thread(() ->
         {
             AlarmManager al = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -169,7 +164,10 @@ public class UserDataManager
             UserMedicine m = drugs.get(position);
             LocationViewHolder locationViewHolder = (LocationViewHolder)holder;
             locationViewHolder.name.setText(m.getName());
-            locationViewHolder.time.setText(m.getHour() + ":" + m.getMinute());
+            if (m.getMinute() < 10)
+                locationViewHolder.time.setText(m.getHour() + ":0" + m.getMinute());
+            else
+                locationViewHolder.time.setText(m.getHour() + ":" + m.getMinute());
             covertManager.getCovert().drawCornerFlag(holder, true);
         }
 

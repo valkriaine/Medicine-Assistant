@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
@@ -30,18 +31,17 @@ public class AlarmReceiver extends BroadcastReceiver
         Log.d(TAG, "broadcast received");
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction()))
         {
-            String toastText = "Alarm Reboot";
+            String toastText = "Restored alarms";
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
             //reschedule alarms after reboot
             new UserDataManager(context).restartAlarms(context);
         }
         else {
-            Log.d(TAG, "is alarm today " + alarmIsToday(intent));
             UserMedicine med = new UserMedicine(intent.getExtras());
             if (alarmIsToday(intent))
             {
                 createNotificationChannel();
-                showNotification(med.getName());
+                showNotification(med.getName(), med.getTargetName());
             }
             med.reSchedule(context);
         }
@@ -76,12 +76,14 @@ public class AlarmReceiver extends BroadcastReceiver
     }
 
     //display notification
-    private void showNotification(String name)
+    private void showNotification(String name, String target)
     {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, PACKAGE_NAME)
-                .setSmallIcon(R.drawable.ic_magnify_black_48dp)
-                .setContentTitle(name)
-                .setContentText("Medicine time")
+                .setSmallIcon(R.drawable.pill)
+                .setContentTitle("Time to take medicine!")
+                .setContentText(target)
+                .setSubText(name)
+                .setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.alarm))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);

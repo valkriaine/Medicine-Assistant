@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
         binding.suggestionsList.setAdapter(suggestionsAdapter);
         binding.viewPager.addOnPageChangeListener(new OnPageChangeListener(binding.searchBox, suggestionsAdapter, binding.drugName, binding.viewPager, this));
 
-        //search for drug after text change in the search bar
+        //search for pill after text change in the search bar
         binding.searchBar.addTextChangeListener(new TextWatcher()
         {
             @Override
