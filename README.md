@@ -42,4 +42,4 @@ User can add medicine name or scann the Medicine, and set time to remind per dos
 <a href="https://play.google.com/store/apps/details?id=com.ramotion.showroom" >
 <img src="https://raw.githubusercontent.com/Ramotion/react-native-circle-menu/master/google_play@2x.png" width="104" height="34"></a>
 
-<a href="https://www.ramotion.com/agency/app-development/?utm_source=gthb&utm_medium=repo&utm_campaign=fluid-slider-android"></a>
+<a href="https://play.google.com/store/apps/details?id=com.smartdigital.medicine"></a>
