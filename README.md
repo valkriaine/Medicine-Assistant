@@ -36,8 +36,6 @@ User can add medicine name or scann the Medicine, and set time to remind per dos
 #### Medicine List
 ![image](https://user-images.githubusercontent.com/64863436/100049631-aaf9ad80-2dcc-11eb-8128-58394a272e53.png)
 
-##  License
-
 
 <a href="https://play.google.com/store/apps/details?id=com.smartdigital.medicine" >
 <img src="https://raw.githubusercontent.com/Ramotion/react-native-circle-menu/master/google_play@2x.png" width="104" height="34"></a>
